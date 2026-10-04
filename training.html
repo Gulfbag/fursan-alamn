@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B1F3A" />
+  
+  <title>مركز التدريب الأمني الذكي | فرسان الأمن للحماية</title>
+  <meta name="description" content="مركز التدريب الأمني الذكي لشركة فرسان الأمن للحماية — برامج تدريبية معتمدة من HCIS، مدعومة بالذكاء الاصطناعي، وشهادات ذكية." />
+  <meta name="keywords" content="تدريب أمني، HCIS، شهادات أمنية، دورات أمنية، فرسان الأمن، تدريب ذكي" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Philosopher:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#0A2463',
+              ink: '#0B1F3A',
+              dark: '#061539',
+            },
+            gold: {
+              DEFAULT: '#C9A227',
+              light: '#E0B830',
+            },
+            silver: '#C0C0C0',
+            cyan: {
+              circuit: '#00E5FF',
+            },
+            cream: '#F7F4EC',
+          },
+          fontFamily: {
+            display: ['El Messiri', 'sans-serif'],
+            body: ['Noto Naskh Arabic', 'serif'],
+            ui: ['Noto Sans Arabic', 'sans-serif'],
+            latin: ['Philosopher', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+  
+  <style>
+    body {
+      font-family: 'Noto Naskh Arabic', serif;
+      color: #0B1F3A;
+      background: #FFFFFF;
+    }
+    
+    .font-display { font-family: 'El Messiri', sans-serif; }
+    .font-ui { font-family: 'Noto Sans Arabic', sans-serif; }
+    .font-latin { font-family: 'Philosopher', serif; }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #C9A227 0%, #E0B830 50%, #C9A227 100%);
+      color: #0B1F3A;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(201, 162, 39, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #0B1F3A;
+      color: #0B1F3A;
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background: #0B1F3A;
+      color: #FFFFFF;
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(11, 31, 58, 0.15);
+    }
+    
+    .gradient-navy {
+      background: linear-gradient(135deg, #0B1F3A 0%, #0A2463 100%);
+    }
+    
+    .gradient-gold {
+      background: linear-gradient(135deg, #C9A227 0%, #E0B830 100%);
+    }
+    
+    .divider-gold {
+      background: linear-gradient(90deg, transparent, #C9A227, transparent);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-navy-ink font-body antialiased">
+
+  <!-- ============================================
+       الهيدر
+  ============================================ -->
+  <header class="sticky top-0 z-40 bg-white shadow-md">
+    <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="/ar" class="flex items-center gap-3">
+        <img src="logo.png" alt="فرسان الأمن" class="w-14 h-14 object-contain" />
+        <div class="leading-tight hidden sm:block">
+          <h1 class="font-display font-bold text-navy-ink text-lg">فرسان الأمن للحماية</h1>
+          <p class="font-latin text-gold text-[11px] tracking-wide">FURSAN AL AMN SECURITY</p>
+        </div>
+      </a>
+      
+      <ul class="hidden lg:flex items-center gap-7 text-sm font-semibold font-ui">
+        <li><a href="/ar" class="hover:text-gold transition">الرئيسية</a></li>
+        <li><a href="/ar/services" class="hover:text-gold transition">خدماتنا</a></li>
+        <li><a href="/ar/training" class="text-gold transition">التدريب</a></li>
+        <li><a href="/ar/blog" class="hover:text-gold transition">المدونة</a></li>
+        <li><a href="/ar/about" class="hover:text-gold transition">من نحن</a></li>
+        <li><a href="/ar/careers" class="hover:text-gold transition">الوظائف</a></li>
+        <li><a href="/ar/contact" class="hover:text-gold transition">تواصل معنا</a></li>
+      </ul>
+      
+      <a href="#register" class="btn-primary hidden md:inline-flex items-center gap-2 font-display font-bold text-sm px-6 py-3 rounded-xl">
+        <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+        سجّل الآن
+      </a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         1. قسم Hero
+    ============================================ -->
+    <section class="relative gradient-navy text-white py-20 md:py-28 overflow-hidden">
+      
+      <!-- خلفية زخرفية -->
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="2" fill="#00E5FF"/>
+              <circle cx="80" cy="80" r="2" fill="#00E5FF"/>
+              <path d="M20 20 L80 20 L80 80" stroke="#C9A227" stroke-width="1" fill="none"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#circuit)"/>
+        </svg>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          
+          <!-- النص -->
+          <div>
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold text-xs font-semibold px-4 py-2 rounded-full mb-6 font-ui">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              معتمد من HCIS | مدعوم بالذكاء الاصطناعي
+            </div>
+
+            <h1 class="font-display font-extrabold text-4xl md:text-5xl leading-tight mb-6">
+              مركز التدريب <br />
+              <span class="text-gold">الأمني الذكي</span>
+            </h1>
+
+            <div class="w-20 h-1 divider-gold mb-8 rounded-full"></div>
+
+            <p class="text-base md:text-lg leading-relaxed text-white/90 mb-8">
+              نُعدّ الكوادر الأمنية بأحدث المعايير العالمية، عبر برامج تدريبية
+              معتمدة، ومنصة ذكية تتيح التعلم في أي وقت ومن أي مكان،
+              مع شهادات موثقة بتقنية NFC.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+              <a href="#courses" class="btn-primary inline-flex items-center gap-2 font-display font-bold px-8 py-4 rounded-xl">
+                <i data-lucide="book-open" class="w-5 h-5"></i>
+                استعرض البرامج
+              </a>
+              <a href="#register" class="inline-flex items-center gap-2 border-2 border-white/60 hover:bg-white/10 text-white font-display font-semibold px-8 py-4 rounded-xl transition">
+                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                سجّل الآن
+              </a>
+            </div>
+
+            <!-- الإحصائيات -->
+            <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/20">
+              <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-gold">+1500</div>
+                <p class="text-xs md:text-sm text-white/80 mt-1">متدرب</p>
+              </div>
+              <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-gold">+20</div>
+                <p class="text-xs md:text-sm text-white/80 mt-1">برنامج تدريبي</p>
+              </div>
+              <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-gold">+850</div>
+                <p class="text-xs md:text-sm text-white/80 mt-1">شهادة صادرة</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- الصورة/البطاقة -->
+          <div class="relative">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/20 rounded-3xl p-8 shadow-2xl">
+              <div class="flex justify-center mb-6">
+                <div class="w-32 h-32 gradient-gold rounded-full flex items-center justify-center">
+                  <i data-lucide="graduation-cap" class="w-16 h-16 text-navy-ink"></i>
+                </div>
+              </div>
+              
+              <h3 class="font-display font-bold text-xl text-center mb-4">
+                شهادة معتمدة بتقنية NFC
+              </h3>
+              
+              <p class="text-center text-white/80 text-sm mb-6">
+                كل شهادة تحتوي على NFC للتحقق الفوري من صحتها
+              </p>
+
+              <div class="bg-white/10 rounded-xl p-4 mb-4">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-gold"></i>
+                  <span class="text-sm font-ui">معتمدة من HCIS</span>
+                </div>
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-gold"></i>
+                  <span class="text-sm font-ui">موثقة بتقنية NFC</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-gold"></i>
+                  <span class="text-sm font-ui">صادرة إلكترونياً</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         2. المميزات (6 بطاقات)
+    ============================================ -->
+    <section class="py-20 bg-cream">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center gap-2 text-gold text-sm font-bold mb-3 font-ui">
+            <span class="w-8 h-px bg-gold"></span>
+            مميزاتنا
+            <span class="w-8 h-px bg-gold"></span>
+          </div>
+          <h2 class="font-display font-bold text-3xl md:text-4xl text-navy-ink mb-4">
+            لماذا مركز التدريب الذكي؟
+          </h2>
+          <p class="text-navy-ink/70 max-w-2xl mx-auto text-base md:text-lg">
+            نجمع بين الخبرة الأمنية والتقنية الحديثة
+            لتقديم تجربة تعليمية استثنائية
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- ميزة 1 -->
+          <div class="bg-white rounded-2xl p-8 card-hover">
+            <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-5">
+              <i data-lucide="award" class="w-8 h-8 text-gold"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy-ink mb-3">
+              شهادات معتمدة من HCIS
+            </h3>
+            <p class="text-navy-ink/70 text-sm leading-relaxed">
+              جميع برامجنا معتمدة من الهيئة العليا للأمن الصناعي،
+              وتُصدر شهادات رسمية معترف بها في المملكة.
+            </p>
+          </div>
+
+          <!-- ميزة 2 -->
+          <div class="bg-white rounded-2xl p-8 card-hover">
+            <div class="w-16 h-16 rounded-full bg-cyan-circuit/10 flex items-center justify-center mb-5">
+              <i data-lucide="brain-circuit" class="w-8 h-8 text-cyan-circuit"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy-ink mb-3">
+              مدعوم بالذكاء الاصطناعي
+            </h3>
+            <p class="text-navy-ink/70 text-sm leading-relaxed">
+              مساعد ذكي يجيب على أسئلتك، يشرح المفاهيم،
+              ويقترح مساراً تعليمياً مخصصاً لك.
+            </p>
+          </div>
+
+          <!-- ميزة 3 -->
+          <div class="bg-white rounded-2xl p-8 card-hover">
+            <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-5">
+              <i data-lucide="smartphone" class="w-8 h-8 text-gold"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy-ink mb-3">
+              شهادات بتقنية NFC
+            </h3>
+            <p class="text-navy-ink/70 text-sm leading-relaxed">
+              كل شهادة تحتوي على شريحة NFC للتحقق الفوري
+              من صحتها، ومنع التزوير.
+            </p>
+          </div>
+
+          <!-- ميزة 4 -->
+          <div class="bg-white rounded-2xl p-8 card-hover">
+            <div class="w-16 h-16 rounded-full bg-cyan-circuit/10 flex items-center justify-center mb-5">
+              <i data-lucide="clock" class="w-8 h-8 text-cyan-circuit"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy-ink mb-3">
+              تعلم في أي وقت
+            </h3>
+            <p class="text-navy-ink/70 text-sm leading-relaxed">
+              منصة تعليمية متاحة 24/7 عبر الجوال والكمبيوتر،
+              تعلم بالسرعة التي تناسبك.
+            </p>
+          </div>
+
+          <!-- ميزة 5 -->
+          <div class="bg-white rounded-2xl p-8 card-hover">
+            <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-5">
+              <i data-lucide="users" class="w-8 h-8 text-gold"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy-ink mb-3">
+              مدربون معتمدون
+            </h3>
+            <p class="text-navy-ink/70 text-sm leading-relaxed">
+              نخبة من المدربين ذوي الخبرة العملية في المجال الأمني،
+              والمعتمدين دولياً.
+            </p>
+          </div>
+
+          <!-- ميزة 6 -->
+          <div class="bg-white rounded-2xl p-8 card-hover">
+            <div class="w-16 h-16 rounded-full bg-cyan-circuit/10 flex items-center justify-center mb-5">
+              <i data-lucide="shield-check" class="w-8 h-8 text-cyan-circuit"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy-ink mb-3">
+              محتوى تفاعلي
+            </h3>
+            <p class="text-navy-ink/70 text-sm leading-relaxed">
+              فيديوهات، رسوم توضيحية، سيناريوهات تفاعلية،
+              واختبارات ذكية لتقييم مستواك.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         3. تصنيفات الدورات
+    ============================================ -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center gap-2 text-gold text-sm font-bold mb-3 font-ui">
+            <span class="w-8 h-px bg-gold"></span>
+            تصنيفات الدورات
+            <span class="w-8 h-px bg-gold"></span>
+          </div>
+          <h2 class="font-display font-bold text-3xl md:text-4xl text-navy-ink mb-4">
+            استكشف مجالات التدريب
+          </h2>
+          <p class="text-navy-ink/70 max-w-2xl mx-auto text-base md:text-lg">
+            أكثر من 20 برنامج تدريبي موزعة على 6 مجالات رئيسية
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+
+          <a href="#security-guards" class="group text-center p-6 rounded-2xl bg-cream hover:bg-gold transition-all duration-300 card-hover">
+            <div class="w-14 h-14 mx-auto rounded-full bg-navy-ink/10 group-hover:bg-white/20 flex items-center justify-center mb-3 transition">
+              <i data-lucide="shield" class="w-7 h-7 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-sm text-navy-ink">الحراسات الأمنية</h3>
+            <p class="text-xs text-navy-ink/60 mt-1 font-ui">8 برامج</p>
+          </a>
+
+          <a href="#industrial-security" class="group text-center p-6 rounded-2xl bg-cream hover:bg-gold transition-all duration-300 card-hover">
+            <div class="w-14 h-14 mx-auto rounded-full bg-navy-ink/10 group-hover:bg-white/20 flex items-center justify-center mb-3 transition">
+              <i data-lucide="factory" class="w-7 h-7 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-sm text-navy-ink">الأمن الصناعي</h3>
+            <p class="text-xs text-navy-ink/60 mt-1 font-ui">4 برامج</p>
+          </a>
+
+          <a href="#fire-safety" class="group text-center p-6 rounded-2xl bg-cream hover:bg-gold transition-all duration-300 card-hover">
+            <div class="w-14 h-14 mx-auto rounded-full bg-navy-ink/10 group-hover:bg-white/20 flex items-center justify-center mb-3 transition">
+              <i data-lucide="flame" class="w-7 h-7 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-sm text-navy-ink">مكافحة الحرائق</h3>
+            <p class="text-xs text-navy-ink/60 mt-1 font-ui">3 برامج</p>
+          </a>
+
+          <a href="#first-aid" class="group text-center p-6 rounded-2xl bg-cream hover:bg-gold transition-all duration-300 card-hover">
+            <div class="w-14 h-14 mx-auto rounded-full bg-navy-ink/10 group-hover:bg-white/20 flex items-center justify-center mb-3 transition">
+              <i data-lucide="heart-pulse" class="w-7 h-7 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-sm text-navy-ink">الإسعافات الأولية</h3>
+            <p class="text-xs text-navy-ink/60 mt-1 font-ui">3 برامج</p>
+          </a>
+
+          <a href="#cybersecurity" class="group text-center p-6 rounded-2xl bg-cream hover:bg-gold transition-all duration-300 card-hover">
+            <div class="w-14 h-14 mx-auto rounded-full bg-navy-ink/10 group-hover:bg-white/20 flex items-center justify-center mb-3 transition">
+              <i data-lucide="shield-check" class="w-7 h-7 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-sm text-navy-ink">الأمن السيبراني</h3>
+            <p class="text-xs text-navy-ink/60 mt-1 font-ui">3 برامج</p>
+          </a>
+
+          <a href="#leadership" class="group text-center p-6 rounded-2xl bg-cream hover:bg-gold transition-all duration-300 card-hover">
+            <div class="w-14 h-14 mx-auto rounded-full bg-navy-ink/10 group-hover:bg-white/20 flex items-center justify-center mb-3 transition">
+              <i data-lucide="crown" class="w-7 h-7 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-sm text-navy-ink">القيادة الأمنية</h3>
+            <p class="text-xs text-navy-ink/60 mt-1 font-ui">2 برنامج</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         4. الدورات المميزة
+    ============================================ -->
+    <section id="courses" class="py-20 bg-cream">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 text-gold text-sm font-bold mb-3 font-ui">
+              <span class="w-8 h-px bg-gold"></span>
+              الدورات المميزة
+            </div>
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-navy-ink">
+              البرامج الأكثر طلباً
+            </h2>
+          </div>
+          <a href="#all-courses" class="hidden md:flex items-center gap-2 text-gold font-semibold text-sm hover:gap-3 transition-all font-ui">
+            عرض الكل
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- دورة 1 -->
+          <article class="bg-white rounded-2xl overflow-hidden card-hover">
+            <div class="h-48 gradient-navy relative flex items-center justify-center">
+              <i data-lucide="shield" class="w-20 h-20 text-gold/60"></i>
+              <div class="absolute top-4 right-4 bg-gold text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                مميزة
+              </div>
+              <div class="absolute top-4 left-4 bg-cyan-circuit text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                HCIS
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-lg text-navy-ink mb-2">
+                أساسيات الحراسات الأمنية
+              </h3>
+              <p class="text-navy-ink/70 text-sm leading-relaxed mb-4">
+                دورة شاملة تغطي مبادئ الأمن، أنظمة الحراسة،
+                والإجراءات التشغيلية الأساسية.
+              </p>
+              
+              <div class="flex items-center gap-4 text-xs text-navy-ink/60 mb-4 font-ui">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  40 ساعة
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                  25 متدرب
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-navy-ink/10">
+                <span class="font-display font-bold text-gold text-xl">مجاناً</span>
+                <a href="#register" class="btn-primary text-xs font-display font-bold px-4 py-2 rounded-lg">
+                  سجّل الآن
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- دورة 2 -->
+          <article class="bg-white rounded-2xl overflow-hidden card-hover">
+            <div class="h-48 gradient-navy relative flex items-center justify-center">
+              <i data-lucide="factory" class="w-20 h-20 text-gold/60"></i>
+              <div class="absolute top-4 right-4 bg-gold text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                مميزة
+              </div>
+              <div class="absolute top-4 left-4 bg-cyan-circuit text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                HCIS
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-lg text-navy-ink mb-2">
+                الأمن الصناعي المتقدم
+              </h3>
+              <p class="text-navy-ink/70 text-sm leading-relaxed mb-4">
+                دورة متخصصة في أمن المنشآت الصناعية، إدارة المخاطر،
+                والتعامل مع الطوارئ.
+              </p>
+              
+              <div class="flex items-center gap-4 text-xs text-navy-ink/60 mb-4 font-ui">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  24 ساعة
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                  20 متدرب
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-navy-ink/10">
+                <span class="font-display font-bold text-navy-ink text-xl">1,500 ر.س</span>
+                <a href="#register" class="btn-primary text-xs font-display font-bold px-4 py-2 rounded-lg">
+                  سجّل الآن
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- دورة 3 -->
+          <article class="bg-white rounded-2xl overflow-hidden card-hover">
+            <div class="h-48 gradient-navy relative flex items-center justify-center">
+              <i data-lucide="flame" class="w-20 h-20 text-gold/60"></i>
+              <div class="absolute top-4 right-4 bg-gold text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                مميزة
+              </div>
+              <div class="absolute top-4 left-4 bg-cyan-circuit text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                مدني
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-lg text-navy-ink mb-2">
+                مكافحة الحرائق
+              </h3>
+              <p class="text-navy-ink/70 text-sm leading-relaxed mb-4">
+                دورة معتمدة من الدفاع المدني، تغطي أنظمة الإنذار،
+                الإطفاء، والإخلاء.
+              </p>
+              
+              <div class="flex items-center gap-4 text-xs text-navy-ink/60 mb-4 font-ui">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  12 ساعة
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                  15 متدرب
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-navy-ink/10">
+                <span class="font-display font-bold text-navy-ink text-xl">800 ر.س</span>
+                <a href="#register" class="btn-primary text-xs font-display font-bold px-4 py-2 rounded-lg">
+                  سجّل الآن
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- دورة 4 -->
+          <article class="bg-white rounded-2xl overflow-hidden card-hover">
+            <div class="h-48 gradient-navy relative flex items-center justify-center">
+              <i data-lucide="heart-pulse" class="w-20 h-20 text-gold/60"></i>
+              <div class="absolute top-4 left-4 bg-cyan-circuit text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                معتمدة
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-lg text-navy-ink mb-2">
+                الإسعافات الأولية
+              </h3>
+              <p class="text-navy-ink/70 text-sm leading-relaxed mb-4">
+                دورة معتمدة من الهلال الأحمر السعودي،
+                تغطي الإنعاش، النزيف، والكسور.
+              </p>
+              
+              <div class="flex items-center gap-4 text-xs text-navy-ink/60 mb-4 font-ui">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  16 ساعة
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                  15 متدرب
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-navy-ink/10">
+                <span class="font-display font-bold text-navy-ink text-xl">600 ر.س</span>
+                <a href="#register" class="btn-primary text-xs font-display font-bold px-4 py-2 rounded-lg">
+                  سجّل الآن
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- دورة 5 -->
+          <article class="bg-white rounded-2xl overflow-hidden card-hover">
+            <div class="h-48 gradient-navy relative flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-20 h-20 text-gold/60"></i>
+              <div class="absolute top-4 left-4 bg-cyan-circuit text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                NCA
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-lg text-navy-ink mb-2">
+                الأمن السيبراني الأساسي
+              </h3>
+              <p class="text-navy-ink/70 text-sm leading-relaxed mb-4">
+                دورة متوافقة مع NCA، تغطي أساسيات الأمن السيبراني،
+                وحماية البيانات.
+              </p>
+              
+              <div class="flex items-center gap-4 text-xs text-navy-ink/60 mb-4 font-ui">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  8 ساعات
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                  20 متدرب
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-navy-ink/10">
+                <span class="font-display font-bold text-navy-ink text-xl">500 ر.س</span>
+                <a href="#register" class="btn-primary text-xs font-display font-bold px-4 py-2 rounded-lg">
+                  سجّل الآن
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- دورة 6 -->
+          <article class="bg-white rounded-2xl overflow-hidden card-hover">
+            <div class="h-48 gradient-navy relative flex items-center justify-center">
+              <i data-lucide="crown" class="w-20 h-20 text-gold/60"></i>
+              <div class="absolute top-4 right-4 bg-gold text-navy-ink text-xs font-bold px-3 py-1 rounded-full font-ui">
+                مميزة
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-lg text-navy-ink mb-2">
+                القيادة الأمنية
+              </h3>
+              <p class="text-navy-ink/70 text-sm leading-relaxed mb-4">
+                دورة متقدمة للمشرفين والمديرين،
+                تغطي إدارة الفرق والتخطيط الاستراتيجي.
+              </p>
+              
+              <div class="flex items-center gap-4 text-xs text-navy-ink/60 mb-4 font-ui">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  24 ساعة
+                </span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="users" class="w-4 h-4"></i>
+                  15 متدرب
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-navy-ink/10">
+                <span class="font-display font-bold text-navy-ink text-xl">2,000 ر.س</span>
+                <a href="#register" class="btn-primary text-xs font-display font-bold px-4 py-2 rounded-lg">
+                  سجّل الآن
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         5. الشهادات
+    ============================================ -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center gap-2 text-gold text-sm font-bold mb-3 font-ui">
+            <span class="w-8 h-px bg-gold"></span>
+            شهاداتنا
+            <span class="w-8 h-px bg-gold"></span>
+          </div>
+          <h2 class="font-display font-bold text-3xl md:text-4xl text-navy-ink mb-4">
+            شهادات معتمدة وموثقة
+          </h2>
+          <p class="text-navy-ink/70 max-w-2xl mx-auto text-base md:text-lg">
+            جميع شهاداتنا معتمدة من الجهات الرسمية، وموثقة بتقنية NFC
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div class="text-center p-8 rounded-2xl bg-cream card-hover">
+            <div class="w-20 h-20 mx-auto rounded-full gradient-gold flex items-center justify-center mb-4">
+              <i data-lucide="shield-check" class="w-10 h-10 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-navy-ink mb-2">HCIS</h3>
+            <p class="text-xs text-navy-ink/60">الهيئة العليا للأمن الصناعي</p>
+          </div>
+
+          <div class="text-center p-8 rounded-2xl bg-cream card-hover">
+            <div class="w-20 h-20 mx-auto rounded-full gradient-gold flex items-center justify-center mb-4">
+              <i data-lucide="flame" class="w-10 h-10 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-navy-ink mb-2">الدفاع المدني</h3>
+            <p class="text-xs text-navy-ink/60">مكافحة الحرائق</p>
+          </div>
+
+          <div class="text-center p-8 rounded-2xl bg-cream card-hover">
+            <div class="w-20 h-20 mx-auto rounded-full gradient-gold flex items-center justify-center mb-4">
+              <i data-lucide="heart-pulse" class="w-10 h-10 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-navy-ink mb-2">الهلال الأحمر</h3>
+            <p class="text-xs text-navy-ink/60">الإسعافات الأولية</p>
+          </div>
+
+          <div class="text-center p-8 rounded-2xl bg-cream card-hover">
+            <div class="w-20 h-20 mx-auto rounded-full gradient-gold flex items-center justify-center mb-4">
+              <i data-lucide="award" class="w-10 h-10 text-navy-ink"></i>
+            </div>
+            <h3 class="font-display font-bold text-navy-ink mb-2">NFC</h3>
+            <p class="text-xs text-navy-ink/60">توثيق ذكي</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         6. CTA + نموذج التسجيل
+    ============================================ -->
+    <section id="register" class="py-20 gradient-navy text-white relative overflow-hidden">
+      
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="circuit-2" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="2" fill="#C9A227"/>
+              <circle cx="90" cy="90" r="2" fill="#C9A227"/>
+              <path d="M30 30 L90 30 L90 90" stroke="#00E5FF" stroke-width="1" fill="none"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#circuit-2)"/>
+        </svg>
+      </div>
+
+      <div class="max-w-3xl mx-auto px-6 relative z-10 text-center">
+        <h2 class="font-display font-bold text-3xl md:text-4xl mb-5">
+          ابدأ رحلتك التدريبية اليوم
+        </h2>
+        <p class="text-white/85 text-base md:text-lg leading-relaxed mb-10">
+          انضم إلى أكثر من 1,500 متدرب اكتسبوا شهادات معتمدة
+          وطوروا مهاراتهم الأمنية.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="YOUR_GOOGLE_FORM_URL" target="_blank" class="btn-primary inline-flex items-center justify-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            سجّل في دورة
+          </a>
+          <a href="/ar/contact" class="inline-flex items-center justify-center gap-2 border-2 border-white/60 hover:bg-white/10 text-white font-display font-semibold px-8 py-4 rounded-xl transition">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            تواصل معنا
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       التذييل
+  ============================================ -->
+  <footer class="bg-navy-ink text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+        <div>
+          <div class="flex items-center gap-3 mb-5">
+            <img src="logo.png" alt="فرسان الأمن" class="w-14 h-14 object-contain" />
+            <div class="leading-tight">
+              <h3 class="font-display font-bold text-white text-base">فرسان الأمن للحماية</h3>
+              <p class="font-latin text-gold text-[10px] tracking-wide">FURSAN AL AMN SECURITY</p>
+            </div>
+          </div>
+          <p class="text-white/70 text-sm leading-relaxed mb-5">
+            شركة سعودية رائدة في تقديم الحلول الأمنية المتكاملة،
+            ومركز التدريب الأمني الذكي.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy-ink flex items-center justify-center transition">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a href="#" aria-label="X" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy-ink flex items-center justify-center transition">
+              <i data-lucide="twitter" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-gold mb-5">روابط سريعة</h4>
+          <ul class="space-y-3 text-white/80 text-sm">
+            <li><a href="/ar/services" class="hover:text-gold transition">خدماتنا</a></li>
+            <li><a href="/ar/training" class="hover:text-gold transition">التدريب</a></li>
+            <li><a href="/ar/blog" class="hover:text-gold transition">المدونة</a></li>
+            <li><a href="/ar/about" class="hover:text-gold transition">من نحن</a></li>
+            <li><a href="/ar/careers" class="hover:text-gold transition">الوظائف</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-gold mb-5">البرامج التدريبية</h4>
+          <ul class="space-y-3 text-white/80 text-sm">
+            <li><a href="#security-guards" class="hover:text-gold transition">الحراسات الأمنية</a></li>
+            <li><a href="#industrial-security" class="hover:text-gold transition">الأمن الصناعي</a></li>
+            <li><a href="#fire-safety" class="hover:text-gold transition">مكافحة الحرائق</a></li>
+            <li><a href="#first-aid" class="hover:text-gold transition">الإسعافات الأولية</a></li>
+            <li><a href="#cybersecurity" class="hover:text-gold transition">الأمن السيبراني</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-gold mb-5">تواصل معنا</h4>
+          <ul class="space-y-4 text-white/80 text-sm">
+            <li class="flex items-start gap-3">
+              <i data-lucide="map-pin" class="w-5 h-5 text-gold flex-shrink-0 mt-0.5"></i>
+              <span>الرياض، حي الروضة، شارع حفصة بنت عمر،<br />مبنى 3308، الرمز البريدي 13211</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="phone" class="w-5 h-5 text-gold flex-shrink-0"></i>
+              <a href="tel:+966114943628" class="hover:text-gold transition" dir="ltr">+966 11 494 3628</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="mail" class="w-5 h-5 text-gold flex-shrink-0"></i>
+              <a href="mailto:info@fursanalamn.com" class="hover:text-gold transition">info@fursanalamn.com</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/60 font-ui">
+        <p>© 2026 فرسان الأمن للحماية — جميع الحقوق محفوظة</p>
+        <div class="flex gap-5">
+          <a href="/ar/privacy" class="hover:text-gold transition">سياسة الخصوصية</a>
+          <a href="/ar/terms" class="hover:text-gold transition">الشروط والأحكام</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // تشغيل الأيقونات
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
