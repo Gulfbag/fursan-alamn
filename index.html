@@ -15,8 +15,8 @@
   <meta property="og:title" content="فرسان الأمن للحماية | حلول أمنية متكاملة" />
   <meta property="og:description" content="حلول أمنية متكاملة مدعومة بمنصة رقمية ذكية" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.fursanalamn.com/ar" />
-  <meta property="og:image" content="https://www.fursanalamn.com/assets/images/og-image.jpg" />
+  <meta property="og:url" content="https://www.fapc.sa" />
+  <meta property="og:image" content="https://www.fapc.sa/logo.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo.png" />
@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Fonts: El Messiri + Philosopher + Noto -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Philosopher:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS -->
@@ -34,34 +34,18 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Tailwind Config - Brand 2026.2 -->
+  <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            navy: {
-              DEFAULT: '#0A2463',
-              dark: '#061539',
-              ink: '#0B1F3A',
-            },
-            gold: {
-              DEFAULT: '#C9A227',
-              light: '#E0B830',
-              dark: '#A88A1F',
-            },
-            silver: {
-              DEFAULT: '#C0C0C0',
-              light: '#E0E0E0',
-              dark: '#A0A0A0',
-            },
-            cyan: {
-              circuit: '#00E5FF',
-              screen: '#0B4D8C',
-            },
+            navy: { DEFAULT: '#0A2463', dark: '#061539', ink: '#0B1F3A' },
+            gold: { DEFAULT: '#C9A227', light: '#E0B830', dark: '#A88A1F' },
+            silver: { DEFAULT: '#C0C0C0', light: '#E0E0E0', dark: '#A0A0A0' },
+            cyan: { circuit: '#00E5FF', screen: '#0B4D8C' },
             cream: '#F7F4EC',
             lightgray: '#F0F0F0',
-            ink: '#000000',
           },
           fontFamily: {
             display: ['El Messiri', 'sans-serif'],
@@ -86,11 +70,7 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Noto Naskh Arabic', serif;
-      font-size: 16px;
-      line-height: 1.6;
-    }
+    body { font-family: 'Noto Naskh Arabic', serif; font-size: 16px; line-height: 1.6; }
     .font-display { font-family: 'El Messiri', sans-serif; }
     .font-ui { font-family: 'Noto Sans Arabic', sans-serif; }
     .font-latin { font-family: 'Philosopher', serif; }
@@ -99,8 +79,6 @@
       background: linear-gradient(135deg, #C9A227 0%, #E0B830 50%, #C9A227 100%);
       color: #0A2463;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
     }
     .btn-primary:hover {
       background: linear-gradient(135deg, #E0B830 0%, #F0C840 50%, #E0B830 100%);
@@ -120,13 +98,8 @@
       color: #C9A227;
     }
 
-    .glow-cyan {
-      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
-    }
-
-    .divider-gold {
-      background: linear-gradient(90deg, transparent, #C9A227, transparent);
-    }
+    .glow-cyan { box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
+    .divider-gold { background: linear-gradient(90deg, transparent, #C9A227, transparent); }
 
     .card-gold {
       border-top: 4px solid transparent;
@@ -144,23 +117,12 @@
         radial-gradient(circle at 80% 80%, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
     }
 
-    *:focus-visible {
-      outline: 2px solid #C9A227;
-      outline-offset: 2px;
-      border-radius: 4px;
-    }
-
-    ::selection {
-      background: #C9A227;
-      color: #0A2463;
-    }
+    *:focus-visible { outline: 2px solid #C9A227; outline-offset: 2px; border-radius: 4px; }
+    ::selection { background: #C9A227; color: #0A2463; }
 
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #F0F0F0; }
-    ::-webkit-scrollbar-thumb {
-      background: #0A2463;
-      border-radius: 5px;
-    }
+    ::-webkit-scrollbar-thumb { background: #0A2463; border-radius: 5px; }
     ::-webkit-scrollbar-thumb:hover { background: #C9A227; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -169,24 +131,12 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* أقسام قابلة للتمرير */
+    section[id] { scroll-margin-top: 100px; }
   </style>
 </head>
 
-  <script>
-  // إصلاح الروابط تلقائياً للنطاق الجديد
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a').forEach(function(link) {
-      const href = link.getAttribute('href');
-      if (href === '/ar' || href === '/ar/') {
-        link.setAttribute('href', 'index.html');
-      } else if (href && href.startsWith('/ar/')) {
-        const page = href.replace('/ar/', '').replace(/\//g, '-');
-        link.setAttribute('href', page + '.html');
-      }
-    });
-  });
-</script>
-  
 <body class="bg-white text-navy font-body antialiased">
 
   <!-- Skip to Content -->
@@ -194,13 +144,11 @@
     تجاوز إلى المحتوى الرئيسي
   </a>
 
-  <!-- ============================================
-       القسم 1: الهيدر العلوي (Top Bar)
-  ============================================ -->
+  <!-- القسم 1: الهيدر العلوي -->
   <div class="hidden md:block bg-navy-ink text-white text-xs py-2">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
       <div class="flex items-center gap-6">
-        <a href="tel:+966114943628" class="flex items-center gap-2 hover:text-gold transition" aria-label="اتصل بنا">
+        <a href="tel:+966114943628" class="flex items-center gap-2 hover:text-gold transition">
           <i data-lucide="phone" class="w-3.5 h-3.5"></i>
           <span dir="ltr" class="font-ui">+966 11 494 3628</span>
         </a>
@@ -212,10 +160,10 @@
       <div class="flex items-center gap-4">
         <div class="flex gap-2">
           <a href="#" aria-label="LinkedIn" class="hover:text-gold transition">
-            <i data-lucide="linkedin" class="w-4 h-4"></i>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
           </a>
           <a href="#" aria-label="X (Twitter)" class="hover:text-gold transition">
-            <i data-lucide="twitter" class="w-4 h-4"></i>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
         </div>
         <span class="text-white/30">|</span>
@@ -224,14 +172,11 @@
     </div>
   </div>
 
-  <!-- ============================================
-       القسم 2: الهيدر الرئيسي (Main Header)
-  ============================================ -->
+  <!-- القسم 2: الهيدر الرئيسي -->
   <header class="sticky top-0 z-40 bg-white shadow-md">
-    <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between" aria-label="القائمة الرئيسية">
-
-      <a href="index.html" class="flex items-center gap-3" aria-label="الصفحة الرئيسية">
-        <img src="logo.png" alt="شعار فرسان الأمن للحماية" class="w-14 h-14 object-contain" />
+    <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.png" alt="شعار فرسان الأمن" class="w-14 h-14 object-contain" />
         <div class="leading-tight hidden sm:block">
           <h1 class="font-display font-bold text-navy text-base lg:text-lg">فرسان الأمن للحماية</h1>
           <p class="font-latin text-gold text-[10px] lg:text-[11px] tracking-wide">FURSAN AL AMN SECURITY</p>
@@ -240,25 +185,21 @@
 
       <ul class="hidden lg:flex items-center gap-7 text-sm font-semibold text-navy font-ui">
         <li><a href="index.html" class="hover:text-gold transition">الرئيسية</a></li>
-        <li><a href="#services" class="hover:text-gold transition flex items-center gap-1">
-          خدماتنا
-          <i data-lucide="chevron-down" class="w-3 h-3"></i>
-        </a></li>
+        <li><a href="#services" class="hover:text-gold transition">خدماتنا</a></li>
         <li><a href="#digital" class="hover:text-gold transition">الحلول الرقمية</a></li>
         <li><a href="#industries" class="hover:text-gold transition">القطاعات</a></li>
-        <li><a href="#about" class="hover:text-gold transition">من نحن</a></li>
-        <li><a href="#careers" class="hover:text-gold transition">الوظائف</a></li>
+        <li><a href="#why-us" class="hover:text-gold transition">من نحن</a></li>
+        <li><a href="training.html" class="hover:text-gold transition">التدريب</a></li>
+        <li><a href="blog.html" class="hover:text-gold transition">المدونة</a></li>
         <li><a href="#contact" class="hover:text-gold transition">تواصل معنا</a></li>
       </ul>
 
       <div class="flex items-center gap-3">
-        <a href="#contact"
-           class="btn-primary hidden md:inline-flex items-center gap-2 font-display font-bold text-sm px-6 py-3 rounded-xl shadow-md">
+        <a href="#contact" class="btn-primary hidden md:inline-flex items-center gap-2 font-display font-bold text-sm px-6 py-3 rounded-xl shadow-md">
           <i data-lucide="check-circle-2" class="w-4 h-4"></i>
           اطلب عرض سعر
         </a>
-
-        <button id="mobile-menu-btn" class="lg:hidden p-2 text-navy" aria-label="فتح القائمة" aria-expanded="false">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-navy" aria-label="فتح القائمة">
           <i data-lucide="menu" class="w-7 h-7"></i>
         </button>
       </div>
@@ -271,7 +212,8 @@
         <li><a href="#digital" class="block py-2 hover:text-gold">الحلول الرقمية</a></li>
         <li><a href="#industries" class="block py-2 hover:text-gold">القطاعات</a></li>
         <li><a href="#why-us" class="block py-2 hover:text-gold">من نحن</a></li>
-        <li><a href="#contact" class="block py-2 hover:text-gold">الوظائف</a></li>
+        <li><a href="training.html" class="block py-2 hover:text-gold">التدريب</a></li>
+        <li><a href="blog.html" class="block py-2 hover:text-gold">المدونة</a></li>
         <li><a href="#contact" class="block py-2 hover:text-gold">تواصل معنا</a></li>
         <li>
           <a href="#contact" class="btn-primary block text-center font-display font-bold py-3 rounded-xl mt-2">
@@ -284,18 +226,14 @@
 
   <main id="main">
 
-    <!-- ============================================
-         القسم 3: قسم البطل (Hero)
-    ============================================ -->
-    <section class="relative min-h-[600px] md:min-h-[680px] flex items-center justify-center overflow-hidden">
-
+    <!-- القسم 3: Hero -->
+    <section id="hero" class="relative min-h-[600px] md:min-h-[680px] flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 z-0">
         <img src="control-room.jpg" alt="مركز التحكم" class="w-full h-full object-cover" loading="eager" />
         <div class="absolute inset-0 bg-gradient-to-bl from-navy/95 via-navy/85 to-navy-ink/95"></div>
       </div>
 
       <div class="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
-
         <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold text-xs font-semibold px-4 py-2 rounded-full mb-6 font-ui">
           <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
           منصة رقمية ذكية | ترخيص أمني من الفئة الأولى
@@ -315,35 +253,22 @@
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact"
-             class="btn-primary inline-flex items-center justify-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
+          <a href="#contact" class="btn-primary inline-flex items-center justify-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
             <i data-lucide="check-circle-2" class="w-5 h-5"></i>
             اطلب عرض سعر
           </a>
-          <a href="#services"
-             class="btn-secondary inline-flex items-center justify-center gap-2 font-display font-semibold px-8 py-4 rounded-xl">
+          <a href="#services" class="btn-secondary inline-flex items-center justify-center gap-2 font-display font-semibold px-8 py-4 rounded-xl">
             تعرف على خدماتنا
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
           </a>
         </div>
-
-      </div>
-
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        <button class="w-8 h-2 rounded-full bg-gold" aria-label="الشريحة 1"></button>
-        <button class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition" aria-label="الشريحة 2"></button>
-        <button class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition" aria-label="الشريحة 3"></button>
       </div>
     </section>
 
-    <!-- ============================================
-         القسم 4: شريط الثقة (Trust Bar)
-    ============================================ -->
-    <section class="bg-lightgray py-10 border-b border-silver/30" aria-label="التراخيص والاعتمادات">
+    <!-- القسم 4: شريط الثقة -->
+    <section id="trust-bar" class="bg-lightgray py-10 border-b border-silver/30">
       <div class="max-w-7xl mx-auto px-6">
-
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
-
           <div class="flex items-center gap-3 text-navy/80 hover:text-navy transition">
             <i data-lucide="shield-check" class="w-8 h-8 text-gold"></i>
             <div class="text-xs md:text-sm font-semibold leading-tight font-ui">
@@ -351,7 +276,6 @@
               <p class="text-navy/60 font-normal">الفئة الأولى (1000 حارس)</p>
             </div>
           </div>
-
           <div class="flex items-center gap-3 text-navy/80 hover:text-navy transition">
             <i data-lucide="file-text" class="w-8 h-8 text-gold"></i>
             <div class="text-xs md:text-sm font-semibold leading-tight font-ui">
@@ -359,7 +283,6 @@
               <p class="text-navy/60 font-normal font-latin" dir="ltr">7051667330</p>
             </div>
           </div>
-
           <div class="flex items-center gap-3 text-navy/80 hover:text-navy transition">
             <i data-lucide="briefcase" class="w-8 h-8 text-gold"></i>
             <div class="text-xs md:text-sm font-semibold leading-tight font-ui">
@@ -367,7 +290,6 @@
               <p class="text-navy/60 font-normal font-latin" dir="ltr">314231506100003</p>
             </div>
           </div>
-
           <div class="flex items-center gap-3 text-navy/80 hover:text-navy transition">
             <i data-lucide="badge-check" class="w-8 h-8 text-gold"></i>
             <div class="text-xs md:text-sm font-semibold leading-tight font-ui">
@@ -375,22 +297,16 @@
               <p class="text-navy/60 font-normal">المركز السعودي للتنافسية</p>
             </div>
           </div>
-
         </div>
-
         <p class="text-center text-navy/60 text-xs md:text-sm mt-6 font-medium font-ui">
           شركة مرخصة وموثقة من الجهات المختصة
         </p>
-
       </div>
     </section>
 
-    <!-- ============================================
-         القسم 5: الخدمات
-    ============================================ -->
-    <section class="py-20 md:py-28 bg-white circuit-bg" id="services">
+    <!-- القسم 5: الخدمات -->
+    <section id="services" class="py-20 md:py-28 bg-white circuit-bg">
       <div class="max-w-7xl mx-auto px-6">
-
         <div class="text-center mb-16">
           <div class="inline-flex items-center gap-2 text-gold text-sm font-bold mb-3 font-ui">
             <span class="w-8 h-px bg-gold"></span>
@@ -407,7 +323,6 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-
           <article class="card-gold bg-white border border-silver/40 rounded-2xl p-6 shadow-[0_4px_20px_rgba(10,36,99,0.06)]">
             <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-5">
               <i data-lucide="monitor-check" class="w-8 h-8 text-gold stroke-[1.5]"></i>
@@ -416,7 +331,7 @@
             <p class="text-navy/70 text-sm leading-relaxed mb-5">
               مراقبة ذكية على مدار الساعة لاتخاذ القرارات بسرعة وفعالية، مدعومة بفيديو ذكاء اصطناعي وغرفة عمليات مركزية.
             </p>
-            <a href="/ar/services/control-center" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
+            <a href="#contact" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
               اقرأ أكثر
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
@@ -430,7 +345,7 @@
             <p class="text-navy/70 text-sm leading-relaxed mb-5">
               حلول أمنية مرنة لفعالياتك باحترافية عالية، تضمن تجربة آمنة ومنظمة لكل الحضور.
             </p>
-            <a href="/ar/services/event-security" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
+            <a href="#contact" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
               اقرأ أكثر
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
@@ -444,7 +359,7 @@
             <p class="text-navy/70 text-sm leading-relaxed mb-5">
               كوادر مؤهلة وخطط انتشار مدروسة، لضمان حماية منشآتك وأصولك على مدار الساعة.
             </p>
-            <a href="/ar/services/security-guards" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
+            <a href="#contact" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
               اقرأ أكثر
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
@@ -458,7 +373,7 @@
             <p class="text-navy/70 text-sm leading-relaxed mb-5">
               نقل مؤمَّن للنقدية والمعادن الثمينة والمستندات الحسّاسة، بمركبات وطواقم مدرَّبة على سلسلة العهدة الكاملة.
             </p>
-            <a href="/ar/services/cash-transport" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
+            <a href="#contact" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
               اقرأ أكثر
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
@@ -472,21 +387,17 @@
             <p class="text-navy/70 text-sm leading-relaxed mb-5">
               فرق حماية مباشرة مدرَّبة لتأمين الأفراد وكبار الشخصيات، في التنقلات والفعاليات والمواقع الحساسة.
             </p>
-            <a href="/ar/services/personal-protection" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
+            <a href="#contact" class="inline-flex items-center gap-1 text-gold font-bold text-sm hover:gap-2 transition-all font-ui">
               اقرأ أكثر
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
           </article>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================
-         القسم 6: المنصة الذكية
-    ============================================ -->
+    <!-- القسم 6: المنصة الذكية -->
     <section id="digital" class="py-20 md:py-28 bg-gradient-to-bl from-navy to-navy-ink text-white overflow-hidden relative">
-
       <div class="absolute inset-0 opacity-15 pointer-events-none" aria-hidden="true">
         <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -503,14 +414,10 @@
       </div>
 
       <div class="max-w-7xl mx-auto px-6 relative z-10">
-
         <div class="grid md:grid-cols-2 gap-12 items-center">
-
           <div class="order-2 md:order-1 relative">
             <div class="relative z-10 animate-float">
-              <img src="digital-horse.png"
-                   alt="منصة فرسان الأمن الذكية"
-                   class="w-full rounded-2xl shadow-2xl glow-cyan" loading="lazy" />
+              <img src="digital-horse.png" alt="منصة فرسان الأمن الذكية" class="w-full rounded-2xl shadow-2xl glow-cyan" loading="lazy" />
             </div>
             <div class="absolute -inset-4 bg-cyan-circuit/20 blur-3xl rounded-full"></div>
           </div>
@@ -577,23 +484,18 @@
               </div>
             </div>
 
-            <a href="/ar/digital-solutions/platform"
-               class="btn-primary inline-flex items-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
+            <a href="#contact" class="btn-primary inline-flex items-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
               اكتشف المنصة
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================
-         القسم 7: القطاعات (Industries)
-    ============================================ -->
+    <!-- القسم 7: القطاعات -->
     <section id="industries" class="py-20 md:py-28 bg-lightgray">
       <div class="max-w-7xl mx-auto px-6">
-
         <div class="text-center mb-16">
           <div class="inline-flex items-center gap-2 text-gold text-sm font-bold mb-3 font-ui">
             <span class="w-8 h-px bg-gold"></span>
@@ -609,8 +511,7 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-
-          <a href="/ar/industries/government" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
+          <a href="#contact" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold/10 transition">
                 <i data-lucide="landmark" class="w-8 h-8 text-navy group-hover:text-gold stroke-[1.5] transition"></i>
@@ -620,7 +521,7 @@
             <p class="text-navy/60 text-xs font-ui">تأمين المنشآت والمرافق الحيوية</p>
           </a>
 
-          <a href="/ar/industries/banking" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
+          <a href="#contact" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold/10 transition">
                 <i data-lucide="building-2" class="w-8 h-8 text-navy group-hover:text-gold stroke-[1.5] transition"></i>
@@ -630,7 +531,7 @@
             <p class="text-navy/60 text-xs font-ui">حماية الفروع ونقل الأموال</p>
           </a>
 
-          <a href="/ar/industries/retail" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
+          <a href="#contact" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold/10 transition">
                 <i data-lucide="shopping-bag" class="w-8 h-8 text-navy group-hover:text-gold stroke-[1.5] transition"></i>
@@ -640,7 +541,7 @@
             <p class="text-navy/60 text-xs font-ui">تغطية أمنية للمراكز التجارية</p>
           </a>
 
-          <a href="/ar/industries/industrial" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
+          <a href="#contact" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold/10 transition">
                 <i data-lucide="factory" class="w-8 h-8 text-navy group-hover:text-gold stroke-[1.5] transition"></i>
@@ -650,7 +551,7 @@
             <p class="text-navy/60 text-xs font-ui">حماية المصانع والمستودعات</p>
           </a>
 
-          <a href="/ar/industries/events" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
+          <a href="#contact" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold/10 transition">
                 <i data-lucide="ticket" class="w-8 h-8 text-navy group-hover:text-gold stroke-[1.5] transition"></i>
@@ -660,7 +561,7 @@
             <p class="text-navy/60 text-xs font-ui">حلول مرنة لجميع أحجام الفعاليات</p>
           </a>
 
-          <a href="/ar/industries/hospitality" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
+          <a href="#contact" class="group bg-white rounded-2xl p-8 text-center transition-all duration-300 border-b-4 border-transparent hover:border-gold hover:shadow-xl hover:-translate-y-1">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold/10 transition">
                 <i data-lucide="hotel" class="w-8 h-8 text-navy group-hover:text-gold stroke-[1.5] transition"></i>
@@ -669,17 +570,13 @@
             <h3 class="font-display font-bold text-navy mb-2">العقارات والضيافة</h3>
             <p class="text-navy/60 text-xs font-ui">أمن الفنادق والمجمعات السكنية</p>
           </a>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================
-         القسم 8: لماذا نحن؟ (Why Us)
-    ============================================ -->
+    <!-- القسم 8: لماذا نحن -->
     <section id="why-us" class="py-20 md:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-
         <div class="text-center mb-14">
           <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mb-4">
             لماذا فرسان الأمن؟
@@ -690,7 +587,6 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-
           <div class="text-center">
             <div class="flex justify-center mb-4">
               <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center">
@@ -734,14 +630,11 @@
             <p class="font-semibold text-navy mb-1 font-ui">معايير عالمية</p>
             <p class="text-navy/60 text-sm">التزام بالجودة والسلامة المهنية</p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================
-         القسم 9: دعوة الإجراء النهائية (Final CTA)
-    ============================================ -->
+    <!-- القسم 9: CTA النهائي -->
     <section id="contact" class="relative py-20 md:py-24 overflow-hidden">
       <div class="absolute inset-0 z-0">
         <img src="control-room.jpg" alt="" class="w-full h-full object-cover" loading="lazy" />
@@ -757,14 +650,11 @@
           فريقنا جاهز للاستماع إليك وتقديم عرض سعر ملائم.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact"
-             class="btn-primary inline-flex items-center justify-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
+          <a href="https://wa.me/966553338111" target="_blank" rel="noopener" class="btn-primary inline-flex items-center justify-center gap-2 font-display font-bold px-8 py-4 rounded-xl shadow-xl">
             <i data-lucide="check-circle-2" class="w-5 h-5"></i>
             اطلب عرض سعر
           </a>
-          <a href="https://wa.me/966553338111"
-             target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fb956] text-white font-display font-bold px-8 py-4 rounded-xl shadow-xl transition-all duration-300">
+          <a href="https://wa.me/966553338111" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fb956] text-white font-display font-bold px-8 py-4 rounded-xl shadow-xl transition-all duration-300">
             <i data-lucide="message-circle" class="w-5 h-5"></i>
             تواصل عبر واتساب
           </a>
@@ -774,14 +664,10 @@
 
   </main>
 
-  <!-- ============================================
-       القسم 10: التذييل (Footer)
-  ============================================ -->
+  <!-- Footer -->
   <footer class="bg-navy-ink text-white pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-6">
-
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-
         <div>
           <div class="flex items-center gap-3 mb-5">
             <img src="logo.png" alt="شعار فرسان الأمن" class="w-14 h-14 object-contain" />
@@ -795,10 +681,10 @@
           </p>
           <div class="flex gap-3">
             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy flex items-center justify-center transition">
-              <i data-lucide="linkedin" class="w-4 h-4"></i>
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
             </a>
             <a href="#" aria-label="X" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy flex items-center justify-center transition">
-              <i data-lucide="twitter" class="w-4 h-4"></i>
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
         </div>
@@ -809,20 +695,20 @@
             <li><a href="#services" class="hover:text-gold transition">خدماتنا</a></li>
             <li><a href="#digital" class="hover:text-gold transition">الحلول الرقمية</a></li>
             <li><a href="#industries" class="hover:text-gold transition">القطاعات</a></li>
-            <li><a href="#about" class="hover:text-gold transition">من نحن</a></li>
-            <li><a href="#careers" class="hover:text-gold transition">الوظائف</a></li>
-            <li><a href="blog.html" class="hover:text-gold transition">المركز الإعلامي</a></li>
+            <li><a href="#why-us" class="hover:text-gold transition">من نحن</a></li>
+            <li><a href="training.html" class="hover:text-gold transition">التدريب</a></li>
+            <li><a href="blog.html" class="hover:text-gold transition">المدونة</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="font-display font-bold text-gold mb-5">خدماتنا</h4>
           <ul class="space-y-3 text-white/80 text-sm">
-            <li><a href="/ar/services/control-center" class="hover:text-gold transition">مركز المراقبة والتحكم</a></li>
-            <li><a href="/ar/services/event-security" class="hover:text-gold transition">أمن الفعاليات</a></li>
-            <li><a href="/ar/services/security-guards" class="hover:text-gold transition">الحراسات الأمنية</a></li>
-            <li><a href="/ar/services/cash-transport" class="hover:text-gold transition">نقل الأموال والمعادن</a></li>
-            <li><a href="/ar/services/personal-protection" class="hover:text-gold transition">الحماية الشخصية</a></li>
+            <li><a href="#services" class="hover:text-gold transition">مركز المراقبة والتحكم</a></li>
+            <li><a href="#services" class="hover:text-gold transition">أمن الفعاليات</a></li>
+            <li><a href="#services" class="hover:text-gold transition">الحراسات الأمنية</a></li>
+            <li><a href="#services" class="hover:text-gold transition">نقل الأموال والمعادن</a></li>
+            <li><a href="#services" class="hover:text-gold transition">الحماية الشخصية</a></li>
           </ul>
         </div>
 
@@ -847,7 +733,6 @@
             </li>
           </ul>
         </div>
-
       </div>
 
       <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/60 font-ui">
@@ -858,38 +743,30 @@
           <a href="#" class="hover:text-gold transition">Sitemap</a>
         </div>
       </div>
-
     </div>
   </footer>
 
-  <!-- ============================================
-       العناصر العائمة
-  ============================================ -->
-
+  <!-- Floating WhatsApp -->
   <a href="https://wa.me/966553338111?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D9%81%D8%B1%D8%B3%D8%A7%D9%86%20%D8%A7%D9%84%D8%A3%D9%85%D9%86."
-     target="_blank" rel="noopener"
-     aria-label="تواصل معنا عبر واتساب"
+     target="_blank" rel="noopener" aria-label="تواصل عبر واتساب"
      class="fixed bottom-6 left-6 z-40 w-14 h-14 md:w-16 md:h-16 bg-[#25D366] hover:bg-[#1fb956] rounded-full flex items-center justify-center shadow-2xl animate-pulse-slow transition-transform hover:scale-110">
-    <i data-lucide="message-circle" class="w-7 h-7 md:w-8 md:h-8 text-white"></i>
+    <svg class="w-7 h-7 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <button id="back-to-top"
-          aria-label="العودة للأعلى"
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="العودة للأعلى"
           class="hidden fixed bottom-24 left-6 z-40 w-11 h-11 bg-navy hover:bg-gold hover:text-navy text-white rounded-full shadow-xl items-center justify-center transition">
     <i data-lucide="arrow-up" class="w-5 h-5 mx-auto"></i>
   </button>
 
   <!-- JavaScript -->
   <script>
-    // Mobile Menu Toggle
+    // Mobile Menu
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-
     if (mobileBtn && mobileMenu) {
       mobileBtn.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.contains('hidden');
         mobileMenu.classList.toggle('hidden');
-        mobileBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
       });
     }
 
@@ -910,7 +787,7 @@
       });
     }
 
-    // Smooth Scroll
+    // Smooth Scroll for anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
@@ -923,91 +800,9 @@
       });
     });
 
-    // Scroll Reveal
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px',
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-8');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('section > div > *').forEach(el => {
-      el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
-      observer.observe(el);
-    });
-
     // Initialize Lucide Icons
     lucide.createIcons();
   </script>
-<!-- إصلاح الروابط للنطاق الجديد -->
-<script>
-  (function() {
-    // خريطة تحويل الروابط
-    const linkMap = {
-  // الصفحات الموجودة
-  '/ar': 'index.html',
-  '/ar/': 'index.html',
-  '/ar/training': 'training.html',
-  '/ar/blog': 'blog.html',
-  
-  // الأقسام الداخلية (موجودة في index.html)
-  '/ar/services': '#services',
-  '/ar/digital-solutions': '#digital',
-  '/ar/industries': '#industries',
-  '/ar/about': '#why-us',
-  '/ar/contact': '#contact',
-  
-  // روابط مؤقتة (تُحدّث عند إنشاء الصفحات)
-  '/ar/careers': '#contact',
-  '/ar/quote': '#contact',
-  '/ar/media': '#blog',
-  '/ar/privacy': 'index.html',
-  '/ar/terms': 'index.html',
-  '/ar/sitemap': 'index.html',
-  '/en': '#en'
-};
-    
-    // تعديل جميع الروابط عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', function() {       // 1. إضافة IDs للأقسام تلقائياً       const sectionMappings = [         { selector: '.circuit-bg', id: 'services' },         { selector: '[class*="bg-gradient-to-bl"]', id: 'digital' },         { selector: '.bg-lightgray', id: 'industries' },         { selector: 'section.py-20.md\:py-24', id: 'why-us' },         { selector: 'section.relative.py-20', id: 'contact' }       ];              sectionMappings.forEach(function(map) {         const section = document.querySelector(map.selector);         if (section && !section.id) {           section.id = map.id;         }       });              // 2. إصلاح الروابط       document.querySelectorAll('a').forEach(function(link) {         const href = link.getAttribute('href');         if (href && linkMap[href]) {           link.setAttribute('href', linkMap[href]);         }       });     });
-      document.querySelectorAll('a').forEach(function(link) {
-        const href = link.getAttribute('href');
-        if (href && linkMap[href]) {
-          link.setAttribute('href', linkMap[href]);
-        }
-      });
-      
-      // إضافة IDs للأقسام (لتعمل الروابط #)
-      const sections = {
-        'services': 'services',
-        'digital': 'digital-solutions',
-        'industries': 'industries',
-        'about': 'why-us',
-        'careers': 'contact',
-        'contact': 'contact',
-        'quote': 'contact',
-        'media': 'blog'
-      };
-      
-      // التأكد من وجود IDs
-      Object.keys(sections).forEach(function(id) {
-        if (!document.getElementById(id)) {
-          const target = document.getElementById(sections[id]);
-          if (target) {
-            target.id = id;
-          }
-        }
-      });
-    });
-  })();
-</script>
-  
+
 </body>
 </html>
