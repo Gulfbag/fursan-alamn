@@ -172,6 +172,21 @@
   </style>
 </head>
 
+  <script>
+  // إصلاح الروابط تلقائياً للنطاق الجديد
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a').forEach(function(link) {
+      const href = link.getAttribute('href');
+      if (href === '/ar' || href === '/ar/') {
+        link.setAttribute('href', 'index.html');
+      } else if (href && href.startsWith('/ar/')) {
+        const page = href.replace('/ar/', '').replace(/\//g, '-');
+        link.setAttribute('href', page + '.html');
+      }
+    });
+  });
+</script>
+  
 <body class="bg-white text-navy font-body antialiased">
 
   <!-- Skip to Content -->
