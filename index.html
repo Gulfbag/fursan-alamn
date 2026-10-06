@@ -947,6 +947,62 @@
     // Initialize Lucide Icons
     lucide.createIcons();
   </script>
-
+<!-- إصلاح الروابط للنطاق الجديد -->
+<script>
+  (function() {
+    // خريطة تحويل الروابط
+    const linkMap = {
+      '/ar': 'index.html',
+      '/ar/': 'index.html',
+      '/ar/services': '#services',
+      '/ar/training': 'training.html',
+      '/ar/blog': 'blog.html',
+      '/ar/about': '#about',
+      '/ar/careers': '#careers',
+      '/ar/contact': '#contact',
+      '/ar/quote': '#quote',
+      '/ar/digital-solutions': '#digital',
+      '/ar/industries': '#industries',
+      '/ar/media': '#media',
+      '/ar/privacy': '#privacy',
+      '/ar/terms': '#terms',
+      '/ar/sitemap': '#sitemap',
+      '/en': '#en'
+    };
+    
+    // تعديل جميع الروابط عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a').forEach(function(link) {
+        const href = link.getAttribute('href');
+        if (href && linkMap[href]) {
+          link.setAttribute('href', linkMap[href]);
+        }
+      });
+      
+      // إضافة IDs للأقسام (لتعمل الروابط #)
+      const sections = {
+        'services': 'services',
+        'digital': 'digital-solutions',
+        'industries': 'industries',
+        'about': 'why-us',
+        'careers': 'contact',
+        'contact': 'contact',
+        'quote': 'contact',
+        'media': 'blog'
+      };
+      
+      // التأكد من وجود IDs
+      Object.keys(sections).forEach(function(id) {
+        if (!document.getElementById(id)) {
+          const target = document.getElementById(sections[id]);
+          if (target) {
+            target.id = id;
+          }
+        }
+      });
+    });
+  })();
+</script>
+  
 </body>
 </html>
