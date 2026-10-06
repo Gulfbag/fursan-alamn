@@ -952,23 +952,28 @@
   (function() {
     // خريطة تحويل الروابط
     const linkMap = {
-      '/ar': 'index.html',
-      '/ar/': 'index.html',
-      '/ar/services': '#services',
-      '/ar/training': 'training.html',
-      '/ar/blog': 'blog.html',
-      '/ar/about': '#about',
-      '/ar/careers': '#careers',
-      '/ar/contact': '#contact',
-      '/ar/quote': '#quote',
-      '/ar/digital-solutions': '#digital',
-      '/ar/industries': '#industries',
-      '/ar/media': '#media',
-      '/ar/privacy': '#privacy',
-      '/ar/terms': '#terms',
-      '/ar/sitemap': '#sitemap',
-      '/en': '#en'
-    };
+  // الصفحات الموجودة
+  '/ar': 'index.html',
+  '/ar/': 'index.html',
+  '/ar/training': 'training.html',
+  '/ar/blog': 'blog.html',
+  
+  // الأقسام الداخلية (موجودة في index.html)
+  '/ar/services': '#services',
+  '/ar/digital-solutions': '#digital',
+  '/ar/industries': '#industries',
+  '/ar/about': '#why-us',
+  '/ar/contact': '#contact',
+  
+  // روابط مؤقتة (تُحدّث عند إنشاء الصفحات)
+  '/ar/careers': '#contact',
+  '/ar/quote': '#contact',
+  '/ar/media': '#blog',
+  '/ar/privacy': 'index.html',
+  '/ar/terms': 'index.html',
+  '/ar/sitemap': 'index.html',
+  '/en': '#en'
+};
     
     // تعديل جميع الروابط عند تحميل الصفحة
     document.addEventListener('DOMContentLoaded', function() {
