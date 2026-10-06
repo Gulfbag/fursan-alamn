@@ -976,7 +976,7 @@
 };
     
     // تعديل جميع الروابط عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {       // 1. إضافة IDs للأقسام تلقائياً       const sectionMappings = [         { selector: '.circuit-bg', id: 'services' },         { selector: '[class*="bg-gradient-to-bl"]', id: 'digital' },         { selector: '.bg-lightgray', id: 'industries' },         { selector: 'section.py-20.md\:py-24', id: 'why-us' },         { selector: 'section.relative.py-20', id: 'contact' }       ];              sectionMappings.forEach(function(map) {         const section = document.querySelector(map.selector);         if (section && !section.id) {           section.id = map.id;         }       });              // 2. إصلاح الروابط       document.querySelectorAll('a').forEach(function(link) {         const href = link.getAttribute('href');         if (href && linkMap[href]) {           link.setAttribute('href', linkMap[href]);         }       });     });
       document.querySelectorAll('a').forEach(function(link) {
         const href = link.getAttribute('href');
         if (href && linkMap[href]) {
