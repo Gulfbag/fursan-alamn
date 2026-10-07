@@ -1,0 +1,17 @@
+# هذا الملف يبني صورة فقط. لا ينشر Cloud Run ولا يمنح allUsers ولا ينشئ مشروعاً أو billing.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --tag
+      - ${_IMAGE_URI}
+      - --build-arg
+      - SITE_ORIGIN=${_SITE_ORIGIN}
+      - .
+images:
+  - ${_IMAGE_URI}
+substitutions:
+  _IMAGE_URI: us-docker.pkg.dev/PROJECT_ID/REPOSITORY/fursan-alamn:manual-tag
+  _SITE_ORIGIN: https://www.fapc.sa
+options:
+  logging: CLOUD_LOGGING_ONLY
