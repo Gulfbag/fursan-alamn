@@ -19,6 +19,8 @@ STAGING_REGION=me-central1 STAGING_NETWORK=fursan-staging-vpc STAGING_SUBNET=fur
 STAGING_REGION=me-central2 STAGING_NETWORK=fursan-staging-vpc STAGING_SUBNET=fursan-staging-dammam node infra/staging/plan-staging.mjs
 ```
 
+يختار المولد للدمام اسم source bucket مستقلًا `${STAGING_PROJECT_ID}-build-source-dammam` بدل الاسم القديم الموجود في الدوحة. يمكن تحديد `STAGING_BUILD_SOURCE_BUCKET` لاسم معتمد يخص المشروع، مع رفض الاسم القديم عند اختيار منطقة أخرى ورفض القيم غير الآمنة. يلزم فحص موقع أي مخزن موجود فعليًا قبل استعماله؛ الاسم وحده لا يثبت المنطقة.
+
 نقل حساب الفوترة لا ينقل Subnet أو bucket أو مستودع الصور الإقليمي. لا تستخدم `fursan-staging-doha` لنشر الدمام، ولا تحذف موارد منطقة سابقة تلقائيًا. يلزم قرار إقليمي واعتماد الموارد الجديدة إن كان البيان السابق يحدد الدوحة.
 
 ## مسار التنفيذ بعد الاعتماد

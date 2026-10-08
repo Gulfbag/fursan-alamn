@@ -24,10 +24,16 @@ export function stagingDeploymentPlan(env = {}) {
   const web = `fursan-staging-web@${project}.iam.gserviceaccount.com`;
   const bridge = `fursan-staging-bridge@${project}.iam.gserviceaccount.com`;
   const build = `fursan-staging-build@${project}.iam.gserviceaccount.com`;
-  const bucket = `${project}-build-source`;
+  const regionalSuffix = REGION === 'me-central1' ? '' : REGION === 'me-central2' ? '-dammam' : `-${REGION}`;
+  const bucket = env.STAGING_BUILD_SOURCE_BUCKET || `${project}-build-source${regionalSuffix}`;
+  if (typeof bucket !== 'string' || !/^[a-z][a-z0-9-]{1,61}[a-z0-9]$/.test(bucket)
+    || !bucket.startsWith(`${project}-build-source`)
+    || (REGION !== 'me-central1' && bucket === `${project}-build-source`)) {
+    throw new Error('isolated_regional_staging_bucket_required');
+  }
   const image = `${REGION}-docker.pkg.dev/${project}/fursan-staging/site:REVIEWED_COMMIT_SHA`;
   return Object.freeze({
-    project, region: REGION, network, subnet, image,
+    project, region: REGION, network, subnet, sourceBucket: bucket, image,
     identities: Object.freeze({ web, bridge, build }),
     commands: Object.freeze([
       `gcloud projects describe ${project} --format='json(projectId,projectNumber,parent)'`,

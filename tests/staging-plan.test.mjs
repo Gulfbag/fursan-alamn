@@ -43,8 +43,15 @@ test('Staging plan supports explicit Dammam after billing access changes without
   const plan = stagingDeploymentPlan({ ...approved, STAGING_REGION: 'me-central2', STAGING_SUBNET: 'fursan-staging-dammam' });
   assert.equal(plan.region, 'me-central2');
   assert.equal(plan.subnet, 'fursan-staging-dammam');
+  assert.equal(plan.sourceBucket, 'fursan-alamn-staging-build-source-dammam');
   assert.ok(plan.image.startsWith('me-central2-docker.pkg.dev/'));
   assert.ok(plan.commands.filter((command) => command.startsWith('gcloud run deploy ')).every((command) => command.includes('--region=me-central2')));
+});
+
+test('Staging source bucket cannot reuse Doha for Dammam or accept production and unsafe names', () => {
+  for (const bucket of ['fursan-alamn-staging-build-source', 'fursan-alamn-prod-build-source', 'gs://fursan-alamn-staging-build-source-dammam', 'fursan-alamn-staging-build-source;echo unsafe']) {
+    assert.throws(() => stagingDeploymentPlan({ ...approved, STAGING_REGION: 'me-central2', STAGING_SUBNET: 'fursan-staging-dammam', STAGING_BUILD_SOURCE_BUCKET: bucket }), /isolated_regional_staging_bucket_required/);
+  }
 });
 
 test('Staging plan rejects production, missing or malformed region, commands and unverified project numbers', () => {
