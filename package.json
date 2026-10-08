@@ -7,12 +7,13 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "build": "node scripts/build-site.mjs && node scripts/build-portal.mjs && tailwindcss -i src/styles.css -o assets/site.css --minify && node scripts/version-assets.mjs",
+    "build": "node scripts/build-site.mjs && node scripts/build-portal.mjs && node scripts/build-operations.mjs && tailwindcss -i src/styles.css -o assets/site.css --minify && node scripts/version-assets.mjs",
     "start": "node server/index.mjs",
     "test": "node --test tests/*.test.mjs",
     "check": "npm run build && npm test && node scripts/check-site.mjs"
   },
   "dependencies": {
+    "@google-cloud/firestore": "9.3.1",
     "google-auth-library": "11.2.0"
   },
   "devDependencies": {

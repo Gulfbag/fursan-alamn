@@ -173,7 +173,7 @@ function logEvent(logger, event) {
 /**
  * ينشأ التطبيق مع sink قابل للحقن لكي تبقى اختبارات الوحدة بلا شبكة أو ADC.
  */
-export function createApp({ config, sink, staticRoot = process.cwd(), now = () => new Date(), logger = console, rateLimiter } = {}) {
+export function createApp({ config, sink, operationsHandler, staticRoot = process.cwd(), now = () => new Date(), logger = console, rateLimiter } = {}) {
   if (!config) throw new TypeError('config is required');
   const limiter = rateLimiter || createMemoryRateLimiter(config.rateLimit);
   const resolvedStaticRoot = path.resolve(staticRoot);
@@ -181,6 +181,8 @@ export function createApp({ config, sink, staticRoot = process.cwd(), now = () =
   return async function app(request, response) {
     setSecurityHeaders(response, '', config.appEnv);
     const url = new URL(request.url, 'http://localhost');
+
+    if (operationsHandler && await operationsHandler(request, response)) return;
 
     if (request.method === 'GET' && url.pathname === '/healthz') {
       return sendJson(response, 200, { status: 'ok' });

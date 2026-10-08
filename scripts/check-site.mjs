@@ -15,7 +15,7 @@ for(const route of config.routes){
   if($('html').attr('lang')!==lang || $('html').attr('dir')!==(lang==='ar'?'rtl':'ltr')) failures.push(`${route.path}: incorrect language/direction`);
   if($('h1').length!==1) failures.push(`${route.path}: expected one h1`);
   if(!$('title').text().trim()||!$('meta[name="description"]').attr('content')) failures.push(`${route.path}: missing metadata`);
-  if(route.kind==='demo') {
+  if(route.kind==='demo'||route.kind==='operations') {
     if(!$('meta[name="robots"]').attr('content')?.includes('noindex')) failures.push(`${route.path}: demo must not be indexed`);
   } else {
     if($('link[rel="canonical"]').attr('href')!==company.origin+route.path) failures.push(`${route.path}: canonical mismatch`);
