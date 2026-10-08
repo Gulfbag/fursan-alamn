@@ -72,7 +72,7 @@ export function renderOperationsPage(locale = 'ar') {
       <button class="ops-menu-button" type="button" aria-expanded="false" aria-controls="ops-sidebar" aria-label="${escapeHtml(t.menu)}" data-action="toggle-menu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
     </div>
   </header>
-  <div class="ops-stage-note" role="note"><strong>${escapeHtml(t.environment)}.</strong> ${escapeHtml(t.environmentNote)}</div>
+  <section class="ops-stage-note" aria-label="${lang === 'ar' ? 'حالة بيئة الاختبار' : 'Test environment notice'}"><strong>${escapeHtml(t.environment)}.</strong> ${escapeHtml(t.environmentNote)}</section>
   <div class="ops-app">
     <aside id="ops-sidebar" class="ops-sidebar" aria-label="${escapeHtml(t.navLabel)}" aria-hidden="false">
       <div class="ops-sidebar-heading"><p>${escapeHtml(t.product)}</p><button class="ops-sidebar-close" type="button" data-action="close-menu" aria-label="${escapeHtml(t.closeMenu)}">×</button></div>

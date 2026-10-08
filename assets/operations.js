@@ -190,7 +190,9 @@
     for (const [label, value, note] of cards) { const card = make('article', { class: 'ops-readiness-card' }); append(card, make('p', {}, label), make('strong', {}, value), make('small', {}, note)); grid.append(card); }
     refs.content.append(grid);
     const empty = Object.values(state.collections).every((items) => !items.length);
-    refs.content.append(stateCard('normal', empty ? text.empty : text.noCounts, empty ? text.dashboardHelp : text.noCounts));
+    const loaded=Object.values(state.list).every(info=>info.status==='loaded');const unfiltered=Object.values(state.list).every(info=>!info.filterQuery&&!info.filterStatus);const confirmedEmpty=loaded&&unfiltered&&empty;
+    refs.content.setAttribute('aria-busy',String(!loaded));
+    refs.content.append(stateCard(loaded?'normal':'loading',!loaded?text.loading:confirmedEmpty?text.empty:text.noCounts,confirmedEmpty?text.dashboardHelp:text.noCounts));
   }
   function renderAssistant() {
     clear(refs.content); refs.content.setAttribute('aria-busy', 'false');
@@ -234,7 +236,7 @@
     try {
       state.config = await getApi('/api/ops/config'); updateEnvironment();
       if (!state.config?.enabled || state.config?.deploymentMode === 'disabled' || state.config?.persistence === 'none') { state.mode = 'disabled'; updateConnection(text.connectionDisabled, 'warning'); render(); return; }
-      state.me = await getApi('/api/ops/me'); state.mode = 'ready'; updateConnection(text.connectionReady, 'ready'); await loadAll(); say(text.apiReady);
+      state.me = await getApi('/api/ops/me'); state.mode = 'ready'; const readyText=state.config.deploymentMode==='development'?(lang==='ar'?'متصل باختبار محلي غير دائم':'Connected to non-durable local test'):text.connectionReady;updateConnection(readyText, 'ready'); await loadAll(); say(text.apiReady);
     } catch (error) {
       state.mode = error?.status === 401 ? 'signin' : error?.status === 403 ? 'forbidden' : error?.status === 503 ? 'disabled' : error?.network ? 'offline' : 'error';
       updateConnection(state.mode === 'signin' ? text.connectionPermission : state.mode === 'forbidden' ? text.forbidden : state.mode === 'disabled' ? text.connectionDisabled : state.mode === 'offline' ? text.connectionOffline : text.connectionError, state.mode === 'signin' || state.mode === 'forbidden' ? 'warning' : 'error'); render();
