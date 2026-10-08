@@ -58,7 +58,7 @@ function cspForHtml(html = '') {
   ].join('; ');
 }
 
-function setSecurityHeaders(response, html = '') {
+function setSecurityHeaders(response, html = '', appEnv = 'production') {
   response.setHeader('Content-Security-Policy', cspForHtml(html));
   response.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
   response.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
@@ -66,6 +66,7 @@ function setSecurityHeaders(response, html = '') {
   response.setHeader('Permissions-Policy', 'camera=(), geolocation=(), microphone=()');
   response.setHeader('X-Content-Type-Options', 'nosniff');
   response.setHeader('X-Frame-Options', 'DENY');
+  if (appEnv === 'staging') response.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
 }
 
 function sendJson(response, statusCode, payload, headers = {}) {
@@ -178,7 +179,7 @@ export function createApp({ config, sink, staticRoot = process.cwd(), now = () =
   const resolvedStaticRoot = path.resolve(staticRoot);
 
   return async function app(request, response) {
-    setSecurityHeaders(response);
+    setSecurityHeaders(response, '', config.appEnv);
     const url = new URL(request.url, 'http://localhost');
 
     if (request.method === 'GET' && url.pathname === '/healthz') {
@@ -240,6 +241,13 @@ export function createApp({ config, sink, staticRoot = process.cwd(), now = () =
 
       logEvent(logger, { event: 'lead_submission_accepted', requestId, sourcePage: result.value.sourcePage });
       return sendJson(response, 201, { requestId, status: 'accepted' });
+    }
+
+    if (request.method === 'GET' && url.pathname === '/robots.txt' && config.appEnv === 'staging') {
+      response.statusCode = 200;
+      response.setHeader('content-type', 'text/plain; charset=utf-8');
+      response.setHeader('cache-control', 'no-store');
+      return response.end('User-agent: *\nDisallow: /\n');
     }
 
     if (request.method === 'GET' || request.method === 'HEAD') {

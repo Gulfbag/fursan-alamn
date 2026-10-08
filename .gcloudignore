@@ -1,0 +1,32 @@
+# حزمة مصدر برمجي فقط؛ لا بيانات اعتماد أو وثائق أعمال أو ملفات جلسة.
+.gcloudignore
+.git
+.git/**
+node_modules
+node_modules/**
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+**/credentials*.json
+**/service-account*.json
+**/secrets/**
+**/*.pdf
+**/*.docx
+**/*.xlsx
+**/upload/**
+**/evidence/**
+**/previews/**
+**/live-previews/**
+**/*-private/**
+coverage
+coverage/**
+test-results
+test-results/**
+playwright-report
+playwright-report/**
+# يطبق أيضًا استثناءات التطوير العامة للمستودع.
+#!include:.gitignore

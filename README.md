@@ -34,6 +34,8 @@ npm start
 | `scripts/build-portal.mjs` و`src/platform/` | بناء البوابة ومنطق العرض والبيانات الافتراضية |
 | `assets/` | أصول محلية محسنة، بلا Tailwind CDN أو مكتبة أيقونات كاملة في المتصفح |
 | `server/` | خادم الملفات العام وAPI الطلبات وموصل Sheets الاختياري |
+| `server/integration/` | جسر استقبال خاص بـCloud Run IAM وGoogle ID Token، معطل الحفظ والمزامنة افتراضيًا |
+| `infra/staging/` | مولد خطة أوامر للمراجعة فقط، يتطلب منطقة اختبار معتمدة ويرفض استهداف الإنتاج |
 | `server/ai/assistant.mjs` | موصل تلخيص إلى Google Cloud، معطل وغير مكشوف كـHTTP API |
 | `tests/` و`scripts/check-site.mjs` | اختبارات خادم ونطاق وDOM وروابط وبيانات الصفحات |
 | `Dockerfile` و`cloudbuild.yaml` | حزمة Cloud Run مستقبلية؛ ملف Cloud Build يبني فقط ولا ينشر |
@@ -57,9 +59,10 @@ SITE_ORIGIN=https://www.example.sa npm run build
 - **أُعد:** API يتحقق من طلبات الويب، وموصل Google Sheets يكتب صفًا واحدًا بـRAW بعد تفعيل صريح وهوية ADC. لا يحاول استخراج Spreadsheet ID من لقطة الشاشة ولا يقرأ الملف الرئيسي.
 - **التوصية:** ملف استقبال طلبات منفصل، ثم مزامن خاص إلى Fursan-Master-Database. صلاحية Editor على ملف Sheets ليست append-only على تبويب واحد. المزامن **غير منفذ** في هذا الإصدار.
 - **أُعد:** موصل تلخيص نصوص مصرح بها عبر هوية Google Cloud، بناتج مسودة ومراجع ومراجعة بشرية، دون أدوات كتابة أو فيديو. لم يُختبر مع نموذج حي ولم يُربط بالبوابة.
+- **أُعد:** `LEAD_SINK=bridge` لجسر Google Cloud Run خاص، بهوية خدمة وallowlist وتحقق توقيع وعقد ثابت ومهلة تشمل الرد. تشغيل receiver ممكن من نفس الحاوية بأمر `node server/integration/receiver-index.mjs`؛ معطل افتراضيًا ويمنع مزامنة Master. يرفض staging اتصال Sheets المباشر من الموقع، ويمنع فهرسة معاينة الاختبار.
 - **بقي:** جرد موارد Google Cloud ومخطط Master Database، SSO/MFA وتفويض خادمي فعلي، تخزين وأثر تدقيق دائمان، حصص موزعة وتسوية التكرار، إعدادات بيانات وخصوصية واعتماد المنطقة والنموذج، ومزامن المصدر الرئيسي واختبارات Pilot.
 
-راجع [دليل Google Cloud وGoogle Sheets](docs/google-cloud-and-database.md)، و[حدود موصل الذكاء الاصطناعي](docs/ai-integration.md). هذه تجهيزات مراجعة وليست شهادة أمن أو امتثال أو إثبات تشغيل إنتاجي.
+راجع [دليل Google Cloud وGoogle Sheets](docs/google-cloud-and-database.md)، و[عقد الجسر المحمي](docs/secure-master-bridge.md)، و[خطة Staging](infra/staging/README.md)، و[حدود موصل الذكاء الاصطناعي](docs/ai-integration.md). لا تعني هويات IAM للتكامل وجود صلاحيات تشغيلية للمستخدمين داخل البوابة، وهذه تجهيزات مراجعة وليست شهادة أمن أو امتثال أو إثبات تشغيل إنتاجي.
 
 ## الاختبارات والقيود
 
