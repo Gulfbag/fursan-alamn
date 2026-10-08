@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0D1E2A">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="description" content="واجهة إدارة عمليات داخلية بلا ورق على بيئة Staging. تتطلب هوية وصلاحيات API خادمية.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'self'">
+  <link rel="canonical" href="/operations.html">
+  <link rel="icon" href="/assets/images/emblem.webp" type="image/webp">
+  <link rel="stylesheet" href="/assets/site.css?v=f37ac2c749d7">
+  <link rel="stylesheet" href="/assets/operations.css?v=f7f911434e66">
+  <link rel="preload" href="/assets/fonts/noto-arabic-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="module" src="/assets/operations.js?v=5aa21360518e"></script>
+  <title>إدارة العمليات الرقمية | فرسان الأمن للحماية</title>
+</head>
+<body class="ops-body" data-locale="ar">
+  <a class="ops-skip-link" href="#ops-main">تجاوز إلى محتوى إدارة العمليات</a>
+  <header class="ops-header">
+    <a class="ops-brand" href="/" aria-label="الموقع الرئيسي">
+      <img src="/assets/images/emblem.webp" width="48" height="48" alt="شعار فرسان الأمن">
+      <span><strong>فرسان الأمن للحماية</strong><small>إدارة العمليات</small></span>
+    </a>
+    <div class="ops-header-actions">
+      <span class="ops-environment" aria-label="Staging">Staging</span>
+      <a class="ops-language" href="/en/operations.html" lang="en" hreflang="en" aria-label="عرض إدارة العمليات باللغة الإنجليزية">English</a>
+      <button class="ops-menu-button" type="button" aria-expanded="false" aria-controls="ops-sidebar" aria-label="فتح قائمة الأقسام" data-action="toggle-menu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+    </div>
+  </header>
+  <section class="ops-stage-note" aria-label="حالة بيئة الاختبار"><strong>Staging.</strong> بيئة اختبار داخلية؛ لا تعتبر خدمة إنتاجية أو توقيعاً قانونياً.</section>
+  <div class="ops-app">
+    <aside id="ops-sidebar" class="ops-sidebar" aria-label="أقسام إدارة العمليات" aria-hidden="false">
+      <div class="ops-sidebar-heading"><p>إدارة العمليات</p><button class="ops-sidebar-close" type="button" data-action="close-menu" aria-label="إغلاق قائمة الأقسام">×</button></div>
+      <nav class="ops-navigation"><button type="button" class="ops-nav-link is-active" data-section="dashboard" aria-current="page"><span>الجاهزية</span></button><button type="button" class="ops-nav-link" data-section="requests" aria-current="false"><span>الطلبات</span></button><button type="button" class="ops-nav-link" data-section="clients" aria-current="false"><span>العملاء</span></button><button type="button" class="ops-nav-link" data-section="tasks" aria-current="false"><span>المهام</span></button><button type="button" class="ops-nav-link" data-section="documents" aria-current="false"><span>ملفات العمل</span></button><button type="button" class="ops-nav-link" data-section="assistant" aria-current="false"><span>المساعد</span></button></nav>
+      <div class="ops-sidebar-boundary"><strong>Staging</strong><p>الاعتماد الرقمي داخلي لمراجعة العمل فقط، وليس توقيعاً قانونياً أو إرسالاً تلقائياً.</p></div>
+    </aside>
+    <div class="ops-overlay" data-action="close-menu" hidden></div>
+    <main id="ops-main" class="ops-main" tabindex="-1">
+      <header class="ops-page-heading">
+        <div><p class="ops-eyebrow">Staging · إدارة العمليات</p><h1>إدارة عمل بلا ورق</h1><p>طلبات وعملاء ومهام وملفات عمل رقمية بمراجعة بشرية وصلاحيات خادمية.</p></div>
+        <p id="ops-connection" class="ops-connection" role="status">يتم التحقق من حالة النظام والصلاحيات…</p>
+      </header>
+      <section class="ops-toolbar" aria-label="أدوات القائمة">
+        <label class="ops-search"><span class="ops-sr-only">بحث في السجل الحالي</span><input id="ops-search" type="search" autocomplete="off" placeholder="بحث في السجل الحالي"></label>
+        <label class="ops-filter"><span class="ops-sr-only">تصفية الحالة</span><select id="ops-status-filter"><option value="">كل الحالات</option></select></label>
+        <span id="ops-toolbar-action"></span>
+      </section>
+      <p id="ops-live" class="ops-sr-only" aria-live="polite">حالة واجهة إدارة العمليات</p>
+      <section id="ops-content" class="ops-content" aria-live="polite" aria-busy="true"><div class="ops-state ops-state-loading"><h2>يتم تحميل واجهة إدارة العمليات…</h2></div></section>
+    </main>
+  </div>
+  <dialog id="ops-dialog" class="ops-dialog" aria-labelledby="ops-dialog-title">
+    <form id="ops-form" method="dialog" novalidate>
+      <div class="ops-dialog-heading"><div><p class="ops-eyebrow">إدارة العمليات</p><h2 id="ops-dialog-title">سجل جديد</h2></div><button class="ops-icon-button" type="button" data-action="close-dialog" aria-label="إغلاق">×</button></div>
+      <div id="ops-dialog-body"></div>
+      <p id="ops-form-error" class="ops-form-error" role="alert" hidden></p>
+      <div class="ops-dialog-actions"><button type="button" class="ops-button ops-button-secondary" data-action="close-dialog">إلغاء</button><button id="ops-submit" type="submit" class="ops-button ops-button-primary">حفظ عبر الخادم</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

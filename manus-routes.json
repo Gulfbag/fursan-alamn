@@ -169,6 +169,14 @@
       "path": "/en/platform.html",
       "title": "Demo operations portal",
       "kind": "demo"
+    },
+    {
+      "path": "/operations.html",
+      "kind": "operations"
+    },
+    {
+      "path": "/en/operations.html",
+      "kind": "operations"
     }
   ]
 }

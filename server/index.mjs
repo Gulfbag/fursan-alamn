@@ -3,6 +3,8 @@ import { createApp } from './app.mjs';
 import { loadConfig } from './config.mjs';
 import { createAdcIdTokenProvider, createCloudRunWebsiteSink } from './integration/cloud-run-website-sink.mjs';
 import { createGoogleAccessTokenProvider, createSheetsSink } from './sheets-sink.mjs';
+import { loadOperationsConfig } from './operations/config.mjs';
+import { createOperationsHandler } from './operations/http.mjs';
 
 const config = loadConfig();
 let sink;
@@ -41,7 +43,11 @@ if (!config.leadSubmissionEnabled) {
   }));
 }
 
-const app = createApp({ config, sink, staticRoot: process.cwd() });
+let operationsConfig;
+try { operationsConfig = loadOperationsConfig(); }
+catch { console.error(JSON.stringify({ event: 'operations_configuration_rejected' })); throw new Error('Operations startup configuration invalid; deployment rejected'); }
+const operationsHandler = createOperationsHandler({ config: operationsConfig });
+const app = createApp({ config, sink, operationsHandler, staticRoot: process.cwd() });
 const server = http.createServer(app);
 
 server.listen(config.port, '0.0.0.0', () => {

@@ -5,7 +5,7 @@ export const company = {
   origin: siteOrigin.origin,
   ar: 'شركة فرسان الأمن للحماية', en: 'Fursan Al-Amn Security Company',
   phone: '+966 11 494 3628', phoneLink: '+966114943628', whatsapp: '966553338111',
-  email: 'info@fursanalamn.com', nationalNumber: '7051667330', vat: '314231506100003',
+  email: 'info@fapc.sa', nationalNumber: '7051667330', vat: '314231506100003',
   license: '2611000035', licenseExpiry: '2027-08-05', dataRegistration: '3260008478',
   jadir: '33411000000', ecommerce: '0000330996', ecommerceExpiry: '2027-09-16',
   address: { ar: 'الرياض، حي الروضة، شارع حفصة بنت عمر، مبنى 3308، الرمز البريدي 13211', en: 'Building 3308, Hafsa Bint Omar Street, Al Rawdah, Riyadh 13211, Saudi Arabia' },
