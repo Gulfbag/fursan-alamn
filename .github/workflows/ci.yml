@@ -1,0 +1,23 @@
+name: Site and platform checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm audit --audit-level=high
+      - name: Verify generated output is committed
+        run: git diff --exit-code
+      - name: Build runtime image without deployment
+        run: docker build --tag fursan-site:ci .

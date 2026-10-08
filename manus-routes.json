@@ -1,0 +1,174 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "حلول أمنية وحراسات بنطاق واضح"
+    },
+    {
+      "path": "/services.html",
+      "title": "خدماتنا الأمنية"
+    },
+    {
+      "path": "/services/monitoring.html",
+      "title": "مركز المراقبة والتحكم"
+    },
+    {
+      "path": "/services/events.html",
+      "title": "أمن الفعاليات"
+    },
+    {
+      "path": "/services/guarding.html",
+      "title": "الحراسات الأمنية"
+    },
+    {
+      "path": "/services/cash.html",
+      "title": "نقل الأموال والمعادن الثمينة"
+    },
+    {
+      "path": "/services/vip.html",
+      "title": "الحماية الشخصية"
+    },
+    {
+      "path": "/about.html",
+      "title": "من نحن"
+    },
+    {
+      "path": "/trust.html",
+      "title": "التراخيص والتسجيلات"
+    },
+    {
+      "path": "/solutions.html",
+      "title": "المنصة والحلول الرقمية"
+    },
+    {
+      "path": "/sectors.html",
+      "title": "القطاعات"
+    },
+    {
+      "path": "/training.html",
+      "title": "التدريب الأمني"
+    },
+    {
+      "path": "/blog.html",
+      "title": "المدونة الأمنية"
+    },
+    {
+      "path": "/quote.html",
+      "title": "طلب عرض سعر"
+    },
+    {
+      "path": "/contact.html",
+      "title": "تواصل معنا"
+    },
+    {
+      "path": "/privacy.html",
+      "title": "سياسة الخصوصية"
+    },
+    {
+      "path": "/terms.html",
+      "title": "الشروط والأحكام"
+    },
+    {
+      "path": "/articles/choosing-security-provider.html",
+      "title": "كيف تختار شريك الحراسة الأمنية؟"
+    },
+    {
+      "path": "/articles/incident-reporting.html",
+      "title": "ما الذي يجعل تقرير الملاحظة الأمنية مفيدًا؟"
+    },
+    {
+      "path": "/articles/human-review-ai.html",
+      "title": "المراجعة البشرية في التنبيهات الأمنية الذكية"
+    },
+    {
+      "path": "/en/",
+      "title": "Security & guarding with a clear scope"
+    },
+    {
+      "path": "/en/services.html",
+      "title": "Security services"
+    },
+    {
+      "path": "/en/services/monitoring.html",
+      "title": "Monitoring & control"
+    },
+    {
+      "path": "/en/services/events.html",
+      "title": "Event security"
+    },
+    {
+      "path": "/en/services/guarding.html",
+      "title": "Security guarding"
+    },
+    {
+      "path": "/en/services/cash.html",
+      "title": "Cash & valuables transport"
+    },
+    {
+      "path": "/en/services/vip.html",
+      "title": "Personal protection"
+    },
+    {
+      "path": "/en/about.html",
+      "title": "About Fursan"
+    },
+    {
+      "path": "/en/trust.html",
+      "title": "Licenses & registrations"
+    },
+    {
+      "path": "/en/solutions.html",
+      "title": "Platform & digital solutions"
+    },
+    {
+      "path": "/en/sectors.html",
+      "title": "Sectors"
+    },
+    {
+      "path": "/en/training.html",
+      "title": "Security training"
+    },
+    {
+      "path": "/en/blog.html",
+      "title": "Security insights"
+    },
+    {
+      "path": "/en/quote.html",
+      "title": "Request a quote"
+    },
+    {
+      "path": "/en/contact.html",
+      "title": "Contact us"
+    },
+    {
+      "path": "/en/privacy.html",
+      "title": "Privacy policy"
+    },
+    {
+      "path": "/en/terms.html",
+      "title": "Terms of use"
+    },
+    {
+      "path": "/en/articles/choosing-security-provider.html",
+      "title": "Choosing a security guarding partner"
+    },
+    {
+      "path": "/en/articles/incident-reporting.html",
+      "title": "What makes a security observation report useful?"
+    },
+    {
+      "path": "/en/articles/human-review-ai.html",
+      "title": "Human review of intelligent security alerts"
+    },
+    {
+      "path": "/platform.html",
+      "title": "بوابة التشغيل التجريبية",
+      "kind": "demo"
+    },
+    {
+      "path": "/en/platform.html",
+      "title": "Demo operations portal",
+      "kind": "demo"
+    }
+  ]
+}

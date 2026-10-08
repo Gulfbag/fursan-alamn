@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /ar/
+Sitemap: https://www.fapc.sa/sitemap.xml
