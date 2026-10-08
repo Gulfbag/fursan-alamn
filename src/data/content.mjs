@@ -3,7 +3,7 @@ if (siteOrigin.protocol !== 'https:' || siteOrigin.pathname !== '/' || siteOrigi
 
 export const company = {
   origin: siteOrigin.origin,
-  ar: 'شركة فرسان الأمن للحماية', en: 'Fursan Al Amn Security',
+  ar: 'شركة فرسان الأمن للحماية', en: 'Fursan Al-Amn Security Company',
   phone: '+966 11 494 3628', phoneLink: '+966114943628', whatsapp: '966553338111',
   email: 'info@fursanalamn.com', nationalNumber: '7051667330', vat: '314231506100003',
   license: '2611000035', licenseExpiry: '2027-08-05', dataRegistration: '3260008478',

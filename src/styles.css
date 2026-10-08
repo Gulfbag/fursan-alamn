@@ -2,31 +2,36 @@
 @source "../src";
 @source "../scripts";
 @theme {
-  --color-navy:#0A2463;
-  --color-navy-dark:#061539;
-  --color-navy-ink:#0B1F3A;
+  --color-navy:#0D1E2A;
+  --color-navy-dark:#08131B;
+  --color-navy-ink:#0D1E2A;
   --color-gold:#C9A227;
   --color-gold-light:#E0B830;
   --color-gold-dark:#806316;
   --color-silver:#C0C0C0;
   --color-silver-light:#E0E0E0;
   --color-silver-dark:#A0A0A0;
-  --color-cyan-circuit:#00E5FF;
-  --color-cyan-screen:#0B4D8C;
+  --color-cyan-circuit:#00B4D8;
+  --color-cyan-screen:#00B4D8;
   --color-cream:#F7F4EC;
   --color-lightgray:#F0F0F0;
   --font-display:'El Messiri',sans-serif;
   --font-body:'Noto Sans Arabic',sans-serif;
   --font-ui:'Noto Sans Arabic',sans-serif;
-  --font-latin:'Noto Sans Arabic',sans-serif;
+  --font-latin:'Noto Sans',sans-serif;
+  --font-brand-latin:'Philosopher','Noto Sans',sans-serif;
 }
 @font-face{font-family:'El Messiri';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/el-messiri-regular.woff2') format('woff2')}
 @font-face{font-family:'El Messiri';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/el-messiri-bold.woff2') format('woff2')}
 @font-face{font-family:'Noto Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/noto-arabic-regular.woff2') format('woff2')}
 @font-face{font-family:'Noto Sans Arabic';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/noto-arabic-bold.woff2') format('woff2')}
+@font-face{font-family:'Noto Sans';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/noto-latin-regular.woff2') format('woff2')}
+@font-face{font-family:'Noto Sans';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/noto-latin-bold.woff2') format('woff2')}
+@font-face{font-family:'Philosopher';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/philosopher-regular.woff2') format('woff2')}
+@font-face{font-family:'Philosopher';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/philosopher-bold.woff2') format('woff2')}
 @layer base {
   html{scroll-behavior:smooth}
-  body{@apply bg-white text-navy font-body antialiased;line-height:1.9}
+  body{@apply bg-white text-navy font-body antialiased;line-height:1.6}
   h1,h2,h3,h4{@apply font-display font-bold;line-height:1.5;text-wrap:pretty}
   p{ text-wrap:pretty }
   button,a,input,select,textarea{touch-action:manipulation}
@@ -36,11 +41,11 @@
   label{@apply block font-bold text-sm mb-2}
   [hidden]{display:none!important}
   section[id]{scroll-margin-top:110px}
-  ::selection{background:#C9A227;color:#061539}
+  ::selection{background:#C9A227;color:#0D1E2A}
 }
 @layer components {
-  .btn-primary{@apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-bold text-navy;min-height:48px;background:linear-gradient(135deg,#C9A227,#E0B830);transition:background .2s,box-shadow .2s}
-  .btn-primary:hover{background:#E0B830;box-shadow:0 6px 18px rgba(10,36,99,.14)}
+  .btn-primary{@apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-bold text-navy;min-height:48px;white-space:nowrap;background:#C9A227;transition:background .2s,box-shadow .2s}
+  .btn-primary:hover{background:#E0B830;box-shadow:0 6px 18px rgba(13,30,42,.14)}
   .btn-secondary{@apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white px-6 py-3 font-bold text-white;min-height:48px}
   .btn-secondary:hover{background:rgba(255,255,255,.1)}
   .btn-outline{@apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-navy px-6 py-3 font-bold text-navy;min-height:48px}
@@ -50,7 +55,7 @@
   .panel{@apply rounded-2xl border border-silver/40 bg-white p-6 md:p-8}
   .eyebrow{@apply mb-3 font-ui text-sm font-bold tracking-wide text-gold-dark}
   .page-hero .eyebrow{@apply text-gold}
-  .prose-site p{@apply mb-6 leading-loose}
+  .prose-site p{@apply mb-6;line-height:1.6}
   .prose-site h2{@apply mb-4 mt-10 text-2xl}
   .prose-site ul{@apply mb-6 list-disc space-y-3; padding-inline-start:1.5rem}
   .field-help{@apply mt-2 text-sm text-slate-600}
@@ -59,15 +64,19 @@
   .status-info{@apply border-navy/20 bg-slate-50 text-navy}
   .status-error{@apply border-red-200 bg-red-50 text-red-900}
   .status-success{@apply border-emerald-300 bg-emerald-50 text-emerald-900}
-  .filter-button{@apply rounded-full border border-navy/20 px-5 py-2 font-bold text-sm;min-height:44px}
+  .filter-button{@apply rounded-xl border border-navy/20 px-5 py-2 font-bold text-sm;min-height:44px}
   .filter-button[aria-pressed="true"]{@apply bg-navy text-white}
   .card-gold{border-top:4px solid transparent;transition:border-color .2s,box-shadow .2s}
-  .card-gold:hover{border-color:#C9A227;box-shadow:0 8px 24px rgba(10,36,99,.1)}
+  .card-gold:hover{border-color:#C9A227;box-shadow:0 8px 24px rgba(13,30,42,.1)}
   .divider-gold{background:linear-gradient(90deg,transparent,#C9A227,transparent)}
-  .circuit-bg{background-image:radial-gradient(circle at 20% 20%,rgba(0,229,255,.035),transparent 50%),radial-gradient(circle at 80% 80%,rgba(201,162,39,.04),transparent 50%)}
-  .glow-cyan{box-shadow:0 0 20px rgba(0,229,255,.16)}
+  .circuit-bg{background-image:radial-gradient(circle at 20% 20%,rgba(0,180,216,.035),transparent 50%),radial-gradient(circle at 80% 80%,rgba(201,162,39,.04),transparent 50%)}
+  .glow-cyan{box-shadow:none}
   .honeypot{position:absolute;inset-inline-start:-10000px;width:1px;height:1px;overflow:hidden}
 }
 @media(max-width:1023px){#mobile-menu{max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}}
 html[dir="ltr"] [data-directional]{transform:scaleX(-1)}
+html[lang="en"] body{font-family:'Noto Sans',sans-serif}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] h4,html[lang="en"] .brand-name{font-family:'Philosopher','Noto Sans',sans-serif}
+main h1{font-size:clamp(2rem,3.2vw,2.5rem);line-height:1.2}
+main h2{font-size:clamp(1.375rem,2.5vw,1.75rem);line-height:1.25}
