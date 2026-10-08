@@ -1,12 +1,13 @@
 import http from 'node:http';
 import { createApp } from './app.mjs';
 import { loadConfig } from './config.mjs';
+import { createAdcIdTokenProvider, createCloudRunWebsiteSink } from './integration/cloud-run-website-sink.mjs';
 import { createGoogleAccessTokenProvider, createSheetsSink } from './sheets-sink.mjs';
 
 const config = loadConfig();
 let sink;
 
-if (config.leadSubmissionEnabled) {
+if (config.mode === 'sheets') {
   try {
     const getAccessToken = await createGoogleAccessTokenProvider();
     sink = createSheetsSink({
@@ -16,6 +17,19 @@ if (config.leadSubmissionEnabled) {
     });
   } catch {
     // لا نطبع تفاصيل اعتماد أو أسماء أسرار؛ تبقى API بحالة 503 صادقة.
+    console.error(JSON.stringify({ event: 'lead_sink_initialization_failed' }));
+  }
+} else if (config.mode === 'bridge') {
+  try {
+    const getIdToken = await createAdcIdTokenProvider();
+    sink = createCloudRunWebsiteSink({
+      origin: config.bridge.origin,
+      audience: config.bridge.audience,
+      allowedOrigins: config.bridge.allowedOrigins,
+      getIdToken,
+    });
+  } catch {
+    // لا نكشف URL أو audience أو تفاصيل ADC؛ يبقى endpoint العام 503 بأمان.
     console.error(JSON.stringify({ event: 'lead_sink_initialization_failed' }));
   }
 }

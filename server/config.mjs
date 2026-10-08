@@ -1,3 +1,5 @@
+import { canonicalCloudRunOrigin } from './integration/cloud-run-website-sink.mjs';
+
 const DEFAULT_SOURCE_PAGES = Object.freeze([
   '/',
   '/ar',
@@ -44,22 +46,49 @@ function normalizeOrigin(value) {
   }
 }
 
+function csvValues(value) {
+  const raw = nonEmpty(value);
+  if (!raw) return null;
+  const values = raw.split(',').map((item) => item.trim());
+  if (values.some((item) => !item)) return null;
+  return values;
+}
+
+function cloudRunOrigin(value) {
+  try {
+    return canonicalCloudRunOrigin(value);
+  } catch {
+    return '';
+  }
+}
+
 /**
  * تُقرأ كل الأسرار والهوية من بيئة وقت التشغيل فقط. لا تُمرر إلى المتصفح.
  */
 export function loadConfig(env = process.env) {
   const requestedSink = (nonEmpty(env.LEAD_SINK) || 'disabled').toLowerCase();
+  const requestedAppEnv = (nonEmpty(env.APP_ENV) || 'production').toLowerCase();
+  const appEnv = ['production', 'staging'].includes(requestedAppEnv) ? requestedAppEnv : '';
   const appOrigin = normalizeOrigin(env.APP_ORIGIN);
   const spreadsheetId = nonEmpty(env.FURSAN_SPREADSHEET_ID);
   const leadsSheet = nonEmpty(env.FURSAN_LEADS_SHEET);
+  const bridgeOrigin = cloudRunOrigin(env.BRIDGE_ORIGIN);
+  const bridgeAudience = cloudRunOrigin(env.BRIDGE_AUDIENCE);
+  const bridgeAllowedOriginsRaw = csvValues(env.BRIDGE_ALLOWED_ORIGINS);
+  const bridgeAllowedOrigins = bridgeAllowedOriginsRaw?.map(cloudRunOrigin) || null;
   const configurationErrors = [];
 
-  if (!['disabled', 'sheets'].includes(requestedSink)) {
-    configurationErrors.push('LEAD_SINK must be disabled or sheets');
+  if (!appEnv) {
+    configurationErrors.push('APP_ENV must be production or staging');
+  }
+
+  if (!['disabled', 'sheets', 'bridge'].includes(requestedSink)) {
+    configurationErrors.push('LEAD_SINK must be disabled, sheets, or bridge');
   }
 
   if (requestedSink === 'sheets') {
     if (!appOrigin) configurationErrors.push('APP_ORIGIN must be an http(s) origin without a path');
+    if (appEnv === 'staging') configurationErrors.push('LEAD_SINK=sheets is not allowed in staging');
     if (!spreadsheetId) configurationErrors.push('FURSAN_SPREADSHEET_ID is required for sheets mode');
     if (!leadsSheet) configurationErrors.push('FURSAN_LEADS_SHEET is required for sheets mode');
     if (leadsSheet && leadsSheet !== REQUIRED_LEADS_SHEET) {
@@ -67,16 +96,37 @@ export function loadConfig(env = process.env) {
     }
   }
 
-  const leadSubmissionEnabled = requestedSink === 'sheets' && configurationErrors.length === 0;
+  if (requestedSink === 'bridge') {
+    if (!appOrigin) configurationErrors.push('APP_ORIGIN must be an http(s) origin without a path');
+    if (!bridgeOrigin) configurationErrors.push('BRIDGE_ORIGIN must be a canonical Cloud Run origin');
+    if (!bridgeAudience) configurationErrors.push('BRIDGE_AUDIENCE must be a canonical Cloud Run origin');
+    if (bridgeOrigin && bridgeAudience && bridgeOrigin !== bridgeAudience) {
+      configurationErrors.push('BRIDGE_AUDIENCE must exactly match BRIDGE_ORIGIN');
+    }
+    if (!bridgeAllowedOrigins || bridgeAllowedOrigins.some((origin) => !origin)) {
+      configurationErrors.push('BRIDGE_ALLOWED_ORIGINS must be a non-empty CSV of canonical Cloud Run origins');
+    } else if (bridgeOrigin && !bridgeAllowedOrigins.includes(bridgeOrigin)) {
+      configurationErrors.push('BRIDGE_ALLOWED_ORIGINS must include BRIDGE_ORIGIN');
+    }
+  }
+
+  const leadSubmissionEnabled = ['sheets', 'bridge'].includes(requestedSink) && configurationErrors.length === 0;
+  const mode = leadSubmissionEnabled ? requestedSink : 'disabled';
 
   return Object.freeze({
     port: positiveInteger(env.PORT, 8080, { max: 65535 }),
+    appEnv: appEnv || 'production',
     requestedSink,
-    mode: leadSubmissionEnabled ? 'sheets' : 'disabled',
+    mode,
     leadSubmissionEnabled,
     appOrigin,
     spreadsheetId,
     leadsSheet,
+    bridge: Object.freeze({
+      origin: bridgeOrigin,
+      audience: bridgeAudience,
+      allowedOrigins: Object.freeze(bridgeAllowedOrigins || []),
+    }),
     consentVersion: nonEmpty(env.FURSAN_CONSENT_VERSION) || DEFAULT_CONSENT_VERSION,
     rateLimit: Object.freeze({
       limit: positiveInteger(env.LEAD_RATE_LIMIT, 8, { max: 1000 }),

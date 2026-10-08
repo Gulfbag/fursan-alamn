@@ -48,6 +48,7 @@ async function createStaticRoot() {
   await writeFile(path.join(root, 'index.html'), '<!doctype html><script type="application/ld+json">{"@context":"https://schema.org"}</script>');
   await writeFile(path.join(root, 'en', 'index.html'), '<!doctype html><h1>English</h1>');
   await writeFile(path.join(root, 'assets', 'site.a1b2c3d4.css'), 'body{}');
+  await writeFile(path.join(root, 'robots.txt'), 'User-agent: *\nAllow: /\n');
   await writeFile(path.join(root, 'plan.md'), 'not public');
   await writeFile(path.join(os.tmpdir(), 'fursan-outside-secret.txt'), 'not public');
   await symlink(path.join(os.tmpdir(), 'fursan-outside-secret.txt'), path.join(root, 'assets', 'outside.txt'));
@@ -90,6 +91,37 @@ test('الحالة المعطلة تعيد 503 و public-config لا يكشف س
     const response = await post(baseUrl, validLead());
     assert.equal(response.status, 503);
     assert.deepEqual(await response.json(), { error: 'lead_submission_unavailable' });
+  });
+});
+
+test('staging يضيف X-Robots-Tag لكل الردود ويستبدل robots بسياسة منع، ولا ينعكس ذلك على production', async () => {
+  const stagingRoot = await createStaticRoot();
+  await withServer({
+    config: enabledConfig({ appEnv: 'staging', mode: 'disabled', leadSubmissionEnabled: false }),
+    staticRoot: stagingRoot,
+  }, async (baseUrl) => {
+    for (const pathName of ['/', '/robots.txt', '/does-not-exist']) {
+      const response = await fetch(`${baseUrl}${pathName}`);
+      assert.equal(response.headers.get('x-robots-tag'), 'noindex, nofollow, noarchive', pathName);
+    }
+    const unavailableLead = await post(baseUrl, validLead());
+    assert.equal(unavailableLead.status, 503);
+    assert.equal(unavailableLead.headers.get('x-robots-tag'), 'noindex, nofollow, noarchive');
+    const robots = await fetch(`${baseUrl}/robots.txt`);
+    assert.equal(await robots.text(), 'User-agent: *\nDisallow: /\n');
+    assert.equal(robots.headers.get('cache-control'), 'no-store');
+  });
+
+  const productionRoot = await createStaticRoot();
+  await withServer({
+    config: enabledConfig({ appEnv: 'production' }),
+    staticRoot: productionRoot,
+  }, async (baseUrl) => {
+    const home = await fetch(`${baseUrl}/`);
+    assert.equal(home.headers.get('x-robots-tag'), null);
+    const robots = await fetch(`${baseUrl}/robots.txt`);
+    assert.equal(robots.headers.get('x-robots-tag'), null);
+    assert.equal(await robots.text(), 'User-agent: *\nAllow: /\n');
   });
 });
 
