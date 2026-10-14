@@ -1,4 +1,6 @@
-const CLOUD_RUN_SUFFIX = '.run.app';
+import { canonicalCloudRunOrigin } from '../cloud-run-origin.mjs';
+export { canonicalCloudRunOrigin };
+
 export const CLOUD_RUN_LEADS_PATH = '/internal/leads';
 export const MAX_CLOUD_RUN_RESPONSE_BYTES = 4 * 1024;
 
@@ -8,43 +10,6 @@ export class CloudRunBridgeError extends Error {
     super(code);
     this.code = code;
   }
-}
-
-function nonEmptyString(value) {
-  return typeof value === 'string' && value.trim() ? value.trim() : '';
-}
-
-/**
- * أصل Cloud Run فقط، بلا مسار أو بيانات مستخدم أو query/fragment أو منفذ غير 443.
- * القيمة المعادة هي الأصل القانوني الذي يستخدم كذلك كـ audience.
- */
-export function canonicalCloudRunOrigin(value) {
-  const raw = nonEmptyString(value);
-  if (!raw) throw new TypeError('invalid_cloud_run_origin');
-
-  let url;
-  try {
-    url = new URL(raw);
-  } catch {
-    throw new TypeError('invalid_cloud_run_origin');
-  }
-
-  const hostname = url.hostname.toLowerCase();
-  const isCloudRunHost = hostname.endsWith(CLOUD_RUN_SUFFIX) && hostname !== 'run.app';
-  if (
-    url.protocol !== 'https:'
-    || !isCloudRunHost
-    || url.username
-    || url.password
-    || url.pathname !== '/'
-    || url.search
-    || url.hash
-    || (url.port && url.port !== '443')
-  ) {
-    throw new TypeError('invalid_cloud_run_origin');
-  }
-
-  return url.origin;
 }
 
 function configuredOrigins(value) {

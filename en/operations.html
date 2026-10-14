@@ -5,40 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0D1E2A">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="description" content="A paperless internal operations interface on Staging. It requires server-side API identity and permissions.">
+  <meta name="description" content="A protected internal operations interface. Environment and role come from a trusted server API.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'self'">
   <link rel="canonical" href="/en/operations.html">
   <link rel="icon" href="/assets/images/emblem.webp" type="image/webp">
-  <link rel="stylesheet" href="/assets/site.css?v=f37ac2c749d7">
-  <link rel="stylesheet" href="/assets/operations.css?v=f7f911434e66">
+  <link rel="stylesheet" href="/assets/operations.css?v=9e97b730dbb0">
   <link rel="preload" href="/assets/fonts/noto-arabic-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="module" src="/assets/operations.js?v=878228c62ca3"></script>
+  <script type="module" src="/assets/operations.js?v=e671a88cdf3d"></script>
   <title>Digital Operations Management | Fursan Al-Amn Security Company</title>
 </head>
 <body class="ops-body" data-locale="en">
   <a class="ops-skip-link" href="#ops-main">Skip to operations content</a>
   <header class="ops-header">
-    <a class="ops-brand" href="/en/" aria-label="Main website">
+    <div class="ops-brand" aria-label="Fursan Al-Amn Security Company">
       <img src="/assets/images/emblem.webp" width="48" height="48" alt="Fursan Al-Amn emblem">
       <span><strong>Fursan Al-Amn Security Company</strong><small>Operations management</small></span>
-    </a>
+    </div>
     <div class="ops-header-actions">
-      <span class="ops-environment" aria-label="Staging">Staging</span>
+      <span class="ops-environment" data-ops-environment aria-live="polite">Checking environment</span>
+      <span class="ops-role" data-ops-role aria-live="polite">Checking role</span>
       <a class="ops-language" href="/operations.html" lang="ar" hreflang="ar" aria-label="View operations management in Arabic">العربية</a>
       <button class="ops-menu-button" type="button" aria-expanded="false" aria-controls="ops-sidebar" aria-label="Open section menu" data-action="toggle-menu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
     </div>
   </header>
-  <section class="ops-stage-note" aria-label="Test environment notice"><strong>Staging.</strong> Internal test environment; not a production service or legal signature.</section>
+  <section class="ops-stage-note" data-ops-environment-note aria-live="polite"><strong data-ops-environment>Checking environment.</strong> <span data-ops-environment-copy>Protected internal interface; environment and role appear after server-side identity verification.</span></section>
   <div class="ops-app">
     <aside id="ops-sidebar" class="ops-sidebar" aria-label="Operations management sections" aria-hidden="false">
       <div class="ops-sidebar-heading"><p>Operations management</p><button class="ops-sidebar-close" type="button" data-action="close-menu" aria-label="Close section menu">×</button></div>
       <nav class="ops-navigation"><button type="button" class="ops-nav-link is-active" data-section="dashboard" aria-current="page"><span>Readiness</span></button><button type="button" class="ops-nav-link" data-section="requests" aria-current="false"><span>Requests</span></button><button type="button" class="ops-nav-link" data-section="clients" aria-current="false"><span>Clients</span></button><button type="button" class="ops-nav-link" data-section="tasks" aria-current="false"><span>Tasks</span></button><button type="button" class="ops-nav-link" data-section="documents" aria-current="false"><span>Work files</span></button><button type="button" class="ops-nav-link" data-section="assistant" aria-current="false"><span>Assistant</span></button></nav>
-      <div class="ops-sidebar-boundary"><strong>Staging</strong><p>Digital approval is internal work review only; it is not a legal signature or automatic sending.</p></div>
+      <div class="ops-sidebar-boundary"><strong data-ops-environment>Checking environment</strong><p>Digital approval is internal work review only; it is not a legal signature or automatic sending.</p></div>
     </aside>
     <div class="ops-overlay" data-action="close-menu" hidden></div>
     <main id="ops-main" class="ops-main" tabindex="-1">
       <header class="ops-page-heading">
-        <div><p class="ops-eyebrow">Staging · Operations management</p><h1>Paperless work management</h1><p>Requests, clients, tasks, and digital work files with human review and server-side permissions.</p></div>
+        <div><p class="ops-eyebrow"><span data-ops-environment>Checking environment</span> · Operations management</p><h1>Paperless work management</h1><p>Requests, clients, tasks, and digital work files with human review and server-side permissions.</p></div>
         <p id="ops-connection" class="ops-connection" role="status">Checking system state and permissions…</p>
       </header>
       <section class="ops-toolbar" aria-label="List tools">
