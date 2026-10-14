@@ -365,7 +365,13 @@ function entityRecord(entity, input, principal, timestamp) {
   };
   record.searchTokens = searchTokensFor(searchValues(entity, record));
   if (entity === 'requests') record.aiUseApproval = null;
-  if (entity === 'documents') record.revisionIds = [];
+  if (entity === 'documents') {
+    record.revisionIds = [];
+    // This is always derived from the verified server-side principal, never
+    // from a document payload. A newly created document has its creator as
+    // its most recent content editor.
+    record.lastContentEditedBy = principal.subject;
+  }
   return record;
 }
 
@@ -518,6 +524,13 @@ function revisionFor(document, action, principal, timestamp) {
     action,
     createdAt: timestamp,
     createdBy: principal.subject,
+    // Retain the identity used by the approval policy in every immutable
+    // revision. Legacy documents lacking the new field retain an explicit
+    // unknown value; the service must not invent content provenance from an
+    // unbounded history scan.
+    lastContentEditedBy: typeof document.lastContentEditedBy === 'string' && document.lastContentEditedBy
+      ? document.lastContentEditedBy
+      : null,
     approval: document.status === 'approved'
       ? {
         type: 'internal_human_approval',
@@ -572,6 +585,27 @@ function stripDocumentApproval(document) {
   delete output.approvedBy;
   delete output.approvedVersion;
   return output;
+}
+
+function hasEffectiveDocumentEdit(current, patch) {
+  return ['title', 'kind', 'content', 'requestId', 'clientId'].some((field) => (
+    own(patch, field) && patch[field] !== current[field]
+  ));
+}
+
+function assertIndependentDocumentApproval(document, principal) {
+  const creator = typeof document.createdBy === 'string' ? document.createdBy : '';
+  // Keep the creator rejection deterministic for old and new documents.
+  if (principal.subject === creator) {
+    fail('self_approval_forbidden', 403);
+  }
+  // Documents created before lastContentEditedBy was introduced remain
+  // readable, but their actual last content editor cannot be reconstructed
+  // safely from a partial or unbounded history. Do not approve on guesswork.
+  if (typeof document.lastContentEditedBy !== 'string' || !document.lastContentEditedBy) {
+    fail('approval_identity_unverified', 409);
+  }
+  if (principal.subject === document.lastContentEditedBy) fail('self_approval_forbidden', 403);
 }
 
 function parseListOptions(entity, options = {}) {
@@ -695,6 +729,9 @@ export function createOperationsService({ store, orgId = 'fursan', now = () => n
         if (entity === 'documents' && current.status === 'archived') fail('terminal_status', 409);
 
         let next;
+        const contentChanged = entity === 'documents'
+          && own(normalized, 'content')
+          && normalized.content !== current.content;
         if (entity === 'documents' && current.status === 'approved') {
           if (normalized.revise !== true) fail('document_revise_required', 409);
           requireManager(actor);
@@ -703,7 +740,17 @@ export function createOperationsService({ store, orgId = 'fursan', now = () => n
         } else {
           if (normalized.revise === true) fail('document_not_approved', 409);
           next = updatedRecord(entity, current, normalized, timestamp);
+          // A real edit while a document is awaiting review invalidates that
+          // review atomically. A normalized no-op remains in_review so a
+          // client retry does not force an unnecessary review cycle.
+          if (entity === 'documents'
+            && current.status === 'in_review'
+            && hasEffectiveDocumentEdit(current, normalized)) {
+            next = stripDocumentApproval(next);
+            next.status = 'draft';
+          }
         }
+        if (contentChanged) next.lastContentEditedBy = actor.subject;
         // Request AI permission binds to a specific request version. Any
         // general edit invalidates it rather than silently reusing approval.
         if (entity === 'requests') next.aiUseApproval = null;
@@ -742,6 +789,7 @@ export function createOperationsService({ store, orgId = 'fursan', now = () => n
         assertCanTransition(entity, current, status, actor);
         if (current.version !== version) fail('version_conflict', 409);
         if (!TRANSITIONS[entity][current.status].has(status)) fail('invalid_transition', 409);
+        if (entity === 'documents' && status === 'approved') assertIndependentDocumentApproval(current, actor);
 
         let next = updatedRecord(entity, current, { status }, timestamp);
         if (entity === 'documents' && status === 'approved') {
