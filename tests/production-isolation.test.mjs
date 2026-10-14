@@ -38,10 +38,12 @@ test('website profile يفشل مغلقًا مع OPS متضارب ولا يرك�
     () => loadDeploymentProfile({ FURSAN_DEPLOYMENT_PROFILE: 'website', LEAD_SINK: 'bridge' }),
     (error) => error instanceof DeploymentProfileError && error.code === 'website_profile_requires_lead_sink_disabled',
   );
+  assert.equal(loadDeploymentProfile({ FURSAN_DEPLOYMENT_PROFILE: 'website', OPS_ENABLED: 'false', OPS_AI_ENABLED: 'false' }).profile, 'website');
 
   const app = createWebsiteApp({
     config: loadConfig({ APP_ENV: 'production', LEAD_SINK: 'disabled' }),
     staticRoot: path.resolve(ROOT.pathname),
+    operationsHandler: () => { throw new Error('website must not invoke operations handlers'); },
   });
   await withServer(app, async (base) => {
     for (const pathname of [
@@ -77,6 +79,28 @@ test('operations profile يفرض أصل الإنتاج وإلغاء lead/AI/Mas
       (error) => error instanceof DeploymentProfileError && error.code === code,
     );
   }
+});
+
+test('معاينة الإنتاج المحمية تقبل ops خلف الموازن فقط وترفض run.app مع audience وproject وdatabase مطابقين', () => {
+  const preview = {
+    FURSAN_DEPLOYMENT_PROFILE: 'operations', OPS_ENABLED: 'true', APP_ENV: 'production',
+    OPS_ORIGIN: 'https://ops.fapc.sa',
+    OPS_PREVIEW_ONLY: 'true', OPS_IAP_AUDIENCE: '/projects/123456789012/locations/me-central2/services/fursan-operations-prod',
+    OPS_PROJECT_ID: 'fursan-platform-prod', OPS_DATABASE_ID: 'fursan-operations-prod',
+  };
+  assert.equal(loadDeploymentProfile(preview).previewOnly, true);
+  for (const patch of [
+    { OPS_ORIGIN: 'https://www.fapc.sa' },
+    { OPS_ORIGIN: 'https://fursan-operations-prod-123456789012.me-central2.run.app' },
+    { OPS_ORIGIN: 'https://fursan-operations-prod-999999999999.me-central2.run.app' },
+    { OPS_ORIGIN: 'https://evil.example' },
+    { OPS_IAP_AUDIENCE: '/projects/123456789012/locations/us-central1/services/fursan-operations-prod' },
+    { OPS_PROJECT_ID: 'fursan-alamn-staging' },
+    { OPS_DATABASE_ID: 'fursan-operations-staging' },
+    { OPS_IAP_AUDIENCE: '/projects/123456789012/locations/me-central2/services/fursan-website-prod' },
+  ]) assert.throws(() => loadDeploymentProfile({ ...preview, ...patch }), (e) => e.code === 'invalid_protected_production_preview_origin');
+  assert.equal(loadDeploymentProfile({ ...preview, OPS_PREVIEW_ONLY: 'false' }).previewOnly, false);
+  assert.throws(() => loadDeploymentProfile({ ...preview, OPS_PREVIEW_ONLY: 'false', OPS_ORIGIN: 'https://fursan-operations-prod-123456789012.me-central2.run.app' }), (e) => e.code === 'production_operations_origin_must_be_ops_fapc_sa');
 });
 
 test('operations HTTP لا يقدم صفحات/أصول/API تسويقية ويبقى noindex بلا CORS أو cookie مشترك', async () => {

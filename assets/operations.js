@@ -86,8 +86,12 @@
     const value = String(state.me?.environment || '').toLowerCase();
     return ['production', 'staging', 'development'].includes(value) ? value : '';
   }
-  function environmentLabel(mode = apiEnvironment()) { return mode ? (text[mode] || mode) : text.environmentChecking; }
+  function environmentLabel(mode = apiEnvironment()) {
+    if (mode === 'production' && state.me?.protectedPreview === true) return lang === 'ar' ? 'الإنتاج — معاينة محمية' : 'Production — protected preview';
+    return mode ? (text[mode] || mode) : text.environmentChecking;
+  }
   function environmentCopy(mode = apiEnvironment()) {
+    if (mode === 'production' && state.me?.protectedPreview === true) return lang === 'ar' ? 'معاينة إنتاج معزولة لاختبارات مصطنعة؛ ليست إطلاقًا تشغيليًا ولا ربطًا بـMaster.' : 'Isolated production preview for synthetic tests; not an operational launch or Master integration.';
     if (mode === 'production') return lang === 'ar' ? 'بيئة إنتاج محمية؛ الصلاحيات تأتي من الهوية وAPI الخادميين.' : 'Protected production environment; permissions come from server-side identity and API.';
     if (mode === 'staging') return lang === 'ar' ? 'بيئة اختبار محمية؛ لا تُعرض أرقام أو سجلات مصطنعة.' : 'Protected test environment; no fabricated counts or records are shown.';
     if (mode === 'development') return lang === 'ar' ? 'اختبار محلي غير دائم؛ لا يمثل بيئة تشغيلية.' : 'Non-durable local test; this is not an operational environment.';

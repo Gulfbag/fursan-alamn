@@ -18,9 +18,19 @@ function operationsVariablesPresent(env) {
   return Object.entries(env).some(([name, candidate]) => (
     name.startsWith('OPS_')
     && name !== 'OPS_ENABLED'
+    && !(name === 'OPS_AI_ENABLED' && candidate === 'false')
     && typeof candidate === 'string'
     && candidate.trim()
   ));
+}
+
+function protectedProductionPreviewOrigin(env) {
+  if (value(env, 'OPS_PREVIEW_ONLY') !== 'true') return '';
+  const audience = value(env, 'OPS_IAP_AUDIENCE');
+  const match = /^\/projects\/(\d+)\/locations\/me-central2\/services\/fursan-operations-prod$/.exec(audience);
+  if (!match || value(env, 'OPS_PROJECT_ID') !== 'fursan-platform-prod') return '';
+  if (value(env, 'OPS_DATABASE_ID') !== 'fursan-operations-prod') return '';
+  return 'https://ops.fapc.sa';
 }
 
 /**
@@ -53,10 +63,15 @@ export function loadDeploymentProfile(env = process.env, { expected } = {}) {
     if (value(env, 'OPS_STORE', 'firestore').toLowerCase() !== 'firestore') fail('operations_profile_requires_firestore');
     if (masterSync !== 'disabled') fail('operations_profile_requires_master_sync_disabled');
     if (aiEnabled) fail('operations_profile_requires_ai_disabled');
-    if (appEnv === 'production' && value(env, 'OPS_ORIGIN') !== 'https://ops.fapc.sa') {
+    const previewOrigin = protectedProductionPreviewOrigin(env);
+    if (value(env, 'OPS_PREVIEW_ONLY') === 'true' && (!previewOrigin || value(env, 'OPS_ORIGIN') !== previewOrigin)) {
+      fail('invalid_protected_production_preview_origin');
+    }
+    if (appEnv === 'production' && value(env, 'OPS_ORIGIN') !== 'https://ops.fapc.sa'
+      && (!previewOrigin || value(env, 'OPS_ORIGIN') !== previewOrigin)) {
       fail('production_operations_origin_must_be_ops_fapc_sa');
     }
   }
 
-  return Object.freeze({ profile, appEnv, leadSink, operationsEnabled });
+  return Object.freeze({ profile, appEnv, leadSink, operationsEnabled, previewOnly: value(env, 'OPS_PREVIEW_ONLY') === 'true' });
 }

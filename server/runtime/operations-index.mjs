@@ -7,7 +7,7 @@ import { createOperationsHandler } from '../operations/http.mjs';
 const deployment = loadDeploymentProfile(process.env, { expected: 'operations' });
 let config;
 try {
-  config = loadOperationsConfig();
+  config = Object.freeze({ ...loadOperationsConfig(), previewOnly: deployment.previewOnly });
 } catch {
   console.error(JSON.stringify({ event: 'operations_configuration_rejected' }));
   throw new Error('Operations startup configuration invalid; deployment rejected');

@@ -14,5 +14,5 @@ export function isWebsiteStaticPath(relativePath) {
  * توزيع Docker الذي لا ينسخ ملفات العمليات أصلاً.
  */
 export function createWebsiteApp(options = {}) {
-  return createApp({ ...options, allowStaticPath: isWebsiteStaticPath });
+  return createApp({ ...options, operationsHandler: undefined, allowStaticPath: isWebsiteStaticPath });
 }
