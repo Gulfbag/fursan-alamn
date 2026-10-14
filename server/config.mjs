@@ -1,4 +1,4 @@
-import { canonicalCloudRunOrigin } from './integration/cloud-run-website-sink.mjs';
+import { canonicalCloudRunOrigin } from './cloud-run-origin.mjs';
 
 const DEFAULT_SOURCE_PAGES = Object.freeze([
   '/',

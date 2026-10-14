@@ -3,10 +3,10 @@ const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character)
 const copy = {
   ar: {
     dir: 'rtl', locale: 'ar', pageTitle: 'إدارة العمليات الرقمية', siteName: 'فرسان الأمن للحماية',
-    description: 'واجهة إدارة عمليات داخلية بلا ورق على بيئة Staging. تتطلب هوية وصلاحيات API خادمية.',
+    description: 'واجهة إدارة عمليات داخلية محمية. تحدد البيئة والدور من API خادمي موثوق.',
     home: 'الموقع الرئيسي', language: 'English', languageLabel: 'عرض إدارة العمليات باللغة الإنجليزية',
     skip: 'تجاوز إلى محتوى إدارة العمليات', menu: 'فتح قائمة الأقسام', closeMenu: 'إغلاق قائمة الأقسام',
-    product: 'إدارة العمليات', environment: 'Staging', environmentNote: 'بيئة اختبار داخلية؛ لا تعتبر خدمة إنتاجية أو توقيعاً قانونياً.',
+    product: 'إدارة العمليات', environment: 'جارٍ التحقق', environmentNote: 'واجهة داخلية محمية؛ تظهر البيئة والدور بعد التحقق من الهوية الخادمية.', roleChecking: 'جارٍ التحقق من الدور',
     navLabel: 'أقسام إدارة العمليات', dashboard: 'الجاهزية', requests: 'الطلبات', clients: 'العملاء', tasks: 'المهام', documents: 'ملفات العمل', assistant: 'المساعد',
     heading: 'إدارة عمل بلا ورق', subheading: 'طلبات وعملاء ومهام وملفات عمل رقمية بمراجعة بشرية وصلاحيات خادمية.',
     connection: 'يتم التحقق من حالة النظام والصلاحيات…', toolbarLabel: 'أدوات القائمة', search: 'بحث في السجل الحالي', filter: 'تصفية الحالة', allStatuses: 'كل الحالات',
@@ -17,10 +17,10 @@ const copy = {
   },
   en: {
     dir: 'ltr', locale: 'en', pageTitle: 'Digital Operations Management', siteName: 'Fursan Al-Amn Security Company',
-    description: 'A paperless internal operations interface on Staging. It requires server-side API identity and permissions.',
+    description: 'A protected internal operations interface. Environment and role come from a trusted server API.',
     home: 'Main website', language: 'العربية', languageLabel: 'View operations management in Arabic',
     skip: 'Skip to operations content', menu: 'Open section menu', closeMenu: 'Close section menu',
-    product: 'Operations management', environment: 'Staging', environmentNote: 'Internal test environment; not a production service or legal signature.',
+    product: 'Operations management', environment: 'Checking environment', environmentNote: 'Protected internal interface; environment and role appear after server-side identity verification.', roleChecking: 'Checking role',
     navLabel: 'Operations management sections', dashboard: 'Readiness', requests: 'Requests', clients: 'Clients', tasks: 'Tasks', documents: 'Work files', assistant: 'Assistant',
     heading: 'Paperless work management', subheading: 'Requests, clients, tasks, and digital work files with human review and server-side permissions.',
     connection: 'Checking system state and permissions…', toolbarLabel: 'List tools', search: 'Search current records', filter: 'Filter status', allStatuses: 'All statuses',
@@ -53,7 +53,6 @@ export function renderOperationsPage(locale = 'ar') {
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'self'">
   <link rel="canonical" href="${operationsPath}">
   <link rel="icon" href="/assets/images/emblem.webp" type="image/webp">
-  <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/operations.css">
   <link rel="preload" href="/assets/fonts/noto-arabic-regular.woff2" as="font" type="font/woff2" crossorigin>
   <script type="module" src="/assets/operations.js"></script>
@@ -62,27 +61,28 @@ export function renderOperationsPage(locale = 'ar') {
 <body class="ops-body" data-locale="${t.locale}">
   <a class="ops-skip-link" href="#ops-main">${escapeHtml(t.skip)}</a>
   <header class="ops-header">
-    <a class="ops-brand" href="${homePath}" aria-label="${escapeHtml(t.home)}">
+    <div class="ops-brand" aria-label="${escapeHtml(t.siteName)}">
       <img src="/assets/images/emblem.webp" width="48" height="48" alt="${lang === 'ar' ? 'شعار فرسان الأمن' : 'Fursan Al-Amn emblem'}">
       <span><strong>${escapeHtml(t.siteName)}</strong><small>${escapeHtml(t.product)}</small></span>
-    </a>
+    </div>
     <div class="ops-header-actions">
-      <span class="ops-environment" aria-label="${escapeHtml(t.environment)}">${escapeHtml(t.environment)}</span>
+      <span class="ops-environment" data-ops-environment aria-live="polite">${escapeHtml(t.environment)}</span>
+      <span class="ops-role" data-ops-role aria-live="polite">${escapeHtml(t.roleChecking)}</span>
       <a class="ops-language" href="${otherPath}" lang="${other}" hreflang="${other}" aria-label="${escapeHtml(t.languageLabel)}">${escapeHtml(t.language)}</a>
       <button class="ops-menu-button" type="button" aria-expanded="false" aria-controls="ops-sidebar" aria-label="${escapeHtml(t.menu)}" data-action="toggle-menu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
     </div>
   </header>
-  <section class="ops-stage-note" aria-label="${lang === 'ar' ? 'حالة بيئة الاختبار' : 'Test environment notice'}"><strong>${escapeHtml(t.environment)}.</strong> ${escapeHtml(t.environmentNote)}</section>
+  <section class="ops-stage-note" data-ops-environment-note aria-live="polite"><strong data-ops-environment>${escapeHtml(t.environment)}.</strong> <span data-ops-environment-copy>${escapeHtml(t.environmentNote)}</span></section>
   <div class="ops-app">
     <aside id="ops-sidebar" class="ops-sidebar" aria-label="${escapeHtml(t.navLabel)}" aria-hidden="false">
       <div class="ops-sidebar-heading"><p>${escapeHtml(t.product)}</p><button class="ops-sidebar-close" type="button" data-action="close-menu" aria-label="${escapeHtml(t.closeMenu)}">×</button></div>
       <nav class="ops-navigation">${navigation}</nav>
-      <div class="ops-sidebar-boundary"><strong>${escapeHtml(t.environment)}</strong><p>${escapeHtml(t.legal)}</p></div>
+      <div class="ops-sidebar-boundary"><strong data-ops-environment>${escapeHtml(t.environment)}</strong><p>${escapeHtml(t.legal)}</p></div>
     </aside>
     <div class="ops-overlay" data-action="close-menu" hidden></div>
     <main id="ops-main" class="ops-main" tabindex="-1">
       <header class="ops-page-heading">
-        <div><p class="ops-eyebrow">${escapeHtml(t.environment)} · ${escapeHtml(t.product)}</p><h1>${escapeHtml(t.heading)}</h1><p>${escapeHtml(t.subheading)}</p></div>
+        <div><p class="ops-eyebrow"><span data-ops-environment>${escapeHtml(t.environment)}</span> · ${escapeHtml(t.product)}</p><h1>${escapeHtml(t.heading)}</h1><p>${escapeHtml(t.subheading)}</p></div>
         <p id="ops-connection" class="ops-connection" role="status">${escapeHtml(t.connection)}</p>
       </header>
       <section class="ops-toolbar" aria-label="${escapeHtml(t.toolbarLabel)}">

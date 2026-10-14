@@ -35,7 +35,7 @@ export function createOperationsHandler({config,store,service,identify,verifyJwt
       const write=['POST','PATCH'].includes(request.method);
       take(`${principal.subject}:${write?'write':'read'}`,write?config.writeRatePerMinute:config.readRatePerMinute);
       if(request.method==='GET'&&url.pathname==='/api/ops/config'){reply(response,200,publicConfig(config));return true;}
-      if(request.method==='GET'&&url.pathname==='/api/ops/me'){reply(response,200,{principal,permissions:principal.permissions,assignees:principal.allowedAssignees});return true;}
+      if(request.method==='GET'&&url.pathname==='/api/ops/me'){reply(response,200,{environment:config.deploymentMode,protectedPreview:Boolean(config.previewOnly),principal,permissions:principal.permissions,assignees:principal.allowedAssignees});return true;}
       if(write){
         if(request.headers.origin!==config.origin||request.headers['x-fursan-intent']!=='operations')throw new OperationsError('origin_not_allowed',403);
         if(!contentTypeIsJson(request.headers['content-type']))throw new OperationsError('unsupported_media_type',415);

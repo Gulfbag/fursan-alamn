@@ -3,6 +3,8 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - build
+      - --target
+      - ${_DEPLOYMENT_TARGET}
       - --tag
       - ${_IMAGE_URI}
       - --build-arg
@@ -13,5 +15,7 @@ images:
 substitutions:
   _IMAGE_URI: us-docker.pkg.dev/PROJECT_ID/REPOSITORY/fursan-alamn:manual-tag
   _SITE_ORIGIN: https://www.fapc.sa
+  # يبقى combined افتراضيًا لتوافق بناء Staging؛ الإنتاج يمرر website أو operations صراحة.
+  _DEPLOYMENT_TARGET: combined
 options:
   logging: CLOUD_LOGGING_ONLY

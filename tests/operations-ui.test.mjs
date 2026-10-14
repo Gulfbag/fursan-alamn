@@ -12,11 +12,11 @@ async function setup(handler,url='https://staging.example.test/operations.html')
  Object.defineProperty(dom.window,'crypto',{value:{randomUUID:()=> '11111111-1111-4111-8111-111111111111'},configurable:true});
  dom.window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};dom.window.HTMLDialogElement.prototype.close=function(){this.open=false;};dom.window.eval(script);await flush();return dom;
 }
-function apiWith({permissions=[],requests=[],status=200,me={principal:{subject:'sub-1',email:'viewer@example.test',role:'viewer',orgId:'org-1'},permissions,roles:['viewer']}}={}){
+function apiWith({permissions=[],requests=[],status=200,me={environment:'staging',principal:{subject:'sub-1',email:'viewer@example.test',role:'viewer',orgId:'org-1'},permissions,roles:['viewer']}}={}){
  return path=>{if(path==='/api/ops/config')return Promise.resolve(response(config,status));if(path==='/api/ops/me')return Promise.resolve(response(me));if(path.startsWith('/api/ops/requests?'))return Promise.resolve(response({items:requests,nextCursor:null}));if(/^\/api\/ops\/(clients|tasks|documents)\?/.test(path))return Promise.resolve(response({items:[],nextCursor:null}));throw Error(`Unexpected request: ${path}`);};
 }
 test('واجهة Staging الفارغة تعرض حالة صريحة ولا تختلق أرقاماً أو سجلات',async()=>{
- const dom=await setup(apiWith()),d=dom.window.document;assert.match(d.querySelector('#ops-content').textContent,/لا توجد سجلات بعد/);assert.match(d.querySelector('#ops-content').textContent,/بيئة Staging فارغة/);assert.equal(d.querySelectorAll('.ops-record').length,0);assert.equal(d.querySelectorAll('#ops-toolbar-action button').length,0);dom.window.close();
+ const dom=await setup(apiWith()),d=dom.window.document;assert.match(d.querySelector('#ops-content').textContent,/لا توجد سجلات بعد/);assert.match(d.querySelector('#ops-content').textContent,/بيئة العمليات المحمية فارغة/);assert.equal(d.querySelectorAll('.ops-record').length,0);assert.equal(d.querySelectorAll('#ops-toolbar-action button').length,0);dom.window.close();
 });
 test('فشل config بخدمة معطلة لا يعرض نجاحاً أو واجهة حفظ',async()=>{
  const dom=await setup(path=>{assert.equal(path,'/api/ops/config');return Promise.resolve(response({error:'disabled'},503));}),d=dom.window.document;assert.match(d.querySelector('#ops-content').textContent,/تم إيقاف النظام خادمياً/);assert.equal(d.querySelector('#ops-content').textContent.includes('تم الحفظ عبر الخادم'),false);assert.equal(d.querySelectorAll('#ops-toolbar-action button').length,0);dom.window.close();
@@ -52,5 +52,20 @@ test('نجاح حفظ ثم فشل تحديث القائمة لا يدعي أن �
 });
 
 test('حالة الجاهزية لا تدعي الفراغ قبل اكتمال API ولا تسمي اختبار الذاكرة Staging',async()=>{
- let release;const pending=new Promise(resolve=>{release=resolve;});const base=apiWith();const dom=await setup(path=>path==='/api/ops/config'?Promise.resolve(response({...config,deploymentMode:'development',persistence:'memory-test'})):path.startsWith('/api/ops/requests?')?pending:base(path));const d=dom.window.document;assert.equal(d.querySelector('#ops-content').textContent.includes('لا توجد سجلات بعد'),false);assert.equal(d.querySelector('#ops-content').getAttribute('aria-busy'),'true');assert.match(d.querySelector('#ops-connection').textContent,/اختبار محلي غير دائم/);release(response({items:[]}));await flush();assert.match(d.querySelector('#ops-content').textContent,/لا توجد سجلات بعد/);assert.equal(d.querySelector('#ops-content').getAttribute('aria-busy'),'false');dom.window.close();
+ let release;const pending=new Promise(resolve=>{release=resolve;});const base=apiWith({me:{environment:'development',principal:{subject:'dev-1',email:'developer@example.test',role:'viewer'},permissions:[]}});const dom=await setup(path=>path==='/api/ops/config'?Promise.resolve(response({...config,deploymentMode:'development',persistence:'memory-test'})):path.startsWith('/api/ops/requests?')?pending:base(path));const d=dom.window.document;assert.equal(d.querySelector('#ops-content').textContent.includes('لا توجد سجلات بعد'),false);assert.equal(d.querySelector('#ops-content').getAttribute('aria-busy'),'true');assert.match(d.querySelector('#ops-connection').textContent,/اختبار محلي غير دائم/);release(response({items:[]}));await flush();assert.match(d.querySelector('#ops-content').textContent,/لا توجد سجلات بعد/);assert.equal(d.querySelector('#ops-content').getAttribute('aria-busy'),'false');dom.window.close();
+});
+
+test('شارة البيئة والدور تأتي من /me الفعلي لا من config أو نص Staging ثابت', async()=>{
+ const dom=await setup(async(path)=>{
+   if(path==='/api/ops/config')return response({...config,deploymentMode:'staging'});
+   if(path==='/api/ops/me')return response({environment:'production',principal:{subject:'manager-1',email:'manager@example.test',role:'manager'},permissions:[]});
+   if(/^\/api\/ops\/(requests|clients|tasks|documents)\?/.test(path))return response({items:[]});
+   throw Error(path);
+ });
+ const d=dom.window.document;
+ assert.equal(d.querySelector('[data-ops-environment]').textContent,'الإنتاج');
+ assert.match(d.querySelector('[data-ops-role]').textContent,/manager/);
+ assert.match(d.querySelector('.ops-stage-note').textContent,/بيئة إنتاج محمية/);
+ assert.equal(d.querySelector('.ops-stage-note').textContent.includes('Staging'),false);
+ dom.window.close();
 });
